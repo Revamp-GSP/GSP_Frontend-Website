@@ -1,0 +1,61 @@
+* {
+    font-family: "Source Sans 3", sans-serif;
+}
+
+body {
+    background-color: white;
+}
+
+.layout {
+    display: flex;
+}
+
+.layout-left {
+    width: 55%;
+    padding: 50px;
+}
+
+.layout-right {
+    width: 40%;
+    padding: 50px;
+}
+
+.brand {
+    margin-bottom: 70px;
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.heading {
+    color: #11235a;
+}
+
+.sub-heading {
+    margin-bottom: 50px;
+    font-size: 20px;
+    font-weight: 400;
+    color: rgb(126, 126, 126);
+}
+
+.loginButton {
+    background-color: #11235a;
+    color: aliceblue;
+}
+
+.loginButton:hover {
+    background-color: #2f2a39;
+    color: aliceblue;
+}
+
+.link-forgot {
+    display: flex;
+    float: right;
+}
+
+.createAccount {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 250px;
+}
