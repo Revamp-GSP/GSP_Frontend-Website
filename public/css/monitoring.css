@@ -1,0 +1,47 @@
+.main-selection {
+    display: flex;
+}
+
+.title {
+    color: rgb(0, 91, 144);
+    font-size: 20px;
+    font-style: bold;
+    margin: 20px 20px;
+}
+
+.selector-service,
+.selector-status,
+.selector-pelanggan,
+.selector-accountMarketing {
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 25%; /* Adjust margin as needed */
+}
+
+.calendar {
+    width: 600px;
+    height: 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+#calendar {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.table th {
+    text-align: center;
+    white-space: nowrap;
+}

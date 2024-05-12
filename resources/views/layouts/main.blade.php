@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
+    
 
     <!-- Link Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Link CSS -->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/sidebar.css">
 
     <!-- Link Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -41,14 +41,14 @@
           <span class="tooltip">User</span>
         </li>
         <li>
-          <a href="/monitoring">
+          <a href="{{ route('project.index') }}">
             <i class="bx bx-table"></i>
             <span class="link_name" style="margin-left:30px;">Monitoring Pekerjaan</span>
           </a>
           <span class="tooltip">Monitoring Pekerjaan</span>
         </li>
         <li>
-          <a href="/dataPel">
+          <a href="{{ route('customers.index') }}">
             <i class="bx bx-folder"></i>
             <span class="link_name" style="margin-left:30px;">Data Pelanggan</span>
           </a>
@@ -84,92 +84,18 @@
       @guest
         @if (Route::has('login'))
           <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
           </li>
         @endif
       @endguest
       <div class="main-menu">
-        <div class="section-one">
-          <div class="card">
-            <div class="card-body">
-              <canvas id="myChart"></canvas>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <canvas id="myChart2"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <canvas id="myChart3"></canvas>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body" style="margin: 40px 40px 20px 20px;">
-            
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            
-          </div>
-        </div>
+        @yield('container')
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <!-- js -->
-    <script src="js/dashboard.js"></script>
-    <script type="module" src="js/chart.js"></script>
-    {{-- <script>
-      var labels = {!! $data->pluck('label') !!};
-      var data = {!! $data->pluck('status') !!};
-      var myChart = new Chart(document.getElementById("myChart"), config);
-      const config = {
-        type: "bar",
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              axis: "y",
-              fill: false,
-              label: "Status Proyek",
-              data: [65, 59, 80, 81, 56, 55, 40],
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-              ],
-              borderColor: [
-                "rgb(255, 99, 132)",
-                "rgb(255, 159, 64)",
-                "rgb(255, 205, 86)",
-                "rgb(75, 192, 192)",
-                "rgb(54, 162, 235)",
-                "rgb(153, 102, 255)",
-                "rgb(201, 203, 207)",
-              ],
-              borderWidth: 1,
-            },
-        ],
-    },
-    options: {
-        indexAxis: "y",
-        scales: {
-            y: {
-                beginAtZero: true,
-            },
-        },
-        maintainAspectRatio: false, // Set to false to allow resizing
-    },
-};
-    </script> --}}
+    <script src="js/sidebar.js"></script>
   </body>
 </html>

@@ -269,14 +269,6 @@ body {
 }
 
 .main-menu {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.card {
-    margin-top: 30px;
-    margin-left: 20px;
-    margin-bottom: -24px;
-    width: 500px;
-    height: 327px;
+    display: grid;
+    grid-template-rows: 100px 300px auto auto;
 }

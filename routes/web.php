@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CustomersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AreaChartController;
+use App\Http\Controllers\ProjectsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,40 @@ Route::get('/dashboard', [HomeController::class,'index'])->middleware('auth');
 Route::get('/register', function () {
     return 'register';
 });
+
+Route::get('/monitoring', function () {
+    return view('monitoring', [
+        "title" => "Form Monitoring",
+    ]);
+});
+
+Route::get('/user', function () {
+    return view('user', [
+        "title" => "User",
+    ]);
+});
+
+Route::get('/dataPel', function () {
+    return view('dataPel', [
+        "title" => "Data Pelanggan",
+    ]);
+});
+
+Route::get('/service', function () {
+    return view('service', [
+        "title" => "Service",
+    ]);
+});
+
+
+Route::get('/dataPel', [CustomersController::class, 'index'])->name('customers.index');
+
+
+Route::get('/monitoring', [ProjectsController::class, 'index'])->name('project.index');
+
+
+
+
 
 Route::get('/test', function () {
     return view('test');
