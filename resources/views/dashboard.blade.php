@@ -16,6 +16,7 @@
 
     <!-- Script Chart.js -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
@@ -81,13 +82,6 @@
       </ul>
     </div>
     <div class="home-section">
-      @guest
-        @if (Route::has('login'))
-          <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-          </li>
-        @endif
-      @endguest
       <div class="main-menu">
         <div class="section-one">
           <div class="card">
@@ -122,54 +116,102 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <!-- js -->
-    <script src="js/dashboard.js"></script>
-    <script type="module" src="js/chart.js"></script>
-    {{-- <script>
-      var labels = {!! $data->pluck('label') !!};
-      var data = {!! $data->pluck('status') !!};
-      var myChart = new Chart(document.getElementById("myChart"), config);
-      const config = {
+  
+    <script>
+
+      const statusProyek = document.getElementById('myChart');
+      const persentaseProyek = document.getElementById('myChart2');
+
+      const labels = [
+          "Postpone",
+          "Follow Up",
+          "Implementasi",
+          "Pembayaran",
+          "Selesai",
+      ];
+      new Chart(statusProyek, {
         type: "bar",
         data: {
           labels: labels,
           datasets: [
-            {
-              axis: "y",
-              fill: false,
-              label: "Status Proyek",
-              data: [65, 59, 80, 81, 56, 55, 40],
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-              ],
-              borderColor: [
-                "rgb(255, 99, 132)",
-                "rgb(255, 159, 64)",
-                "rgb(255, 205, 86)",
-                "rgb(75, 192, 192)",
-                "rgb(54, 162, 235)",
-                "rgb(153, 102, 255)",
-                "rgb(201, 203, 207)",
-              ],
-              borderWidth: 1,
-            },
-        ],
-    },
-    options: {
-        indexAxis: "y",
-        scales: {
+              {
+                axis: "y",
+                fill: false,
+                label: "Status Proyek",
+                data: [{{$count_postpone}}, {{$count_followUp}}, {{$count_implementasi}}, {{$count_pembayaran}}, {{$count_selesai}}],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)",
+                ],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+        },
+        options: {
+          indexAxis: "y",
+          scales: {
             y: {
                 beginAtZero: true,
             },
+          },
+          maintainAspectRatio: false, // Set to false to allow resizing
         },
-        maintainAspectRatio: false, // Set to false to allow resizing
-    },
-};
-    </script> --}}
+      });
+      new Chart(persentaseProyek, {
+        type: "doughnut",
+        data: {
+          labels: labels,
+          datasets: [
+              {
+                fill: false,
+                label: "Persentase Proyek",
+                data: [{{$percentage_postpone}},{{$percentage_followUp}},{{$percentage_implementasi}},{{$percentage_pembayaran}},{{$percentage_selesai}}],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)",
+                ],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+        },
+        options: {
+          indexAxis: "y",
+          scales: {
+            y: {
+                beginAtZero: true,
+            },
+          },
+          maintainAspectRatio: false, // Set to false to allow resizing
+        },
+      });
+    </script>
   </body>
 </html>

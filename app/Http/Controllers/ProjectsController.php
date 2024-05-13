@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\customers;
 use App\Models\product;
 use App\Models\project;
@@ -12,8 +12,9 @@ class ProjectsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = project::query();
-
+        $query = DB::table('projects');
+    
+        // Conditionally apply date range filter
         if ($request->has('date_range_start') && $request->has('date_range_end')) {
             $dateRangeStart = $request->date_range_start;
             $dateRangeEnd = $request->date_range_end;
@@ -24,7 +25,7 @@ class ProjectsController extends Controller
                   ->orWhereBetween('actual_end_date', [$dateRangeStart, $dateRangeEnd]);
         }
     
-        // Search by product name or description
+        // Conditionally apply search filter
         if ($request->has('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -37,23 +38,37 @@ class ProjectsController extends Controller
                   ->orWhere('nilai_pekerjaan_aktual', 'like', "%$search%")
                   ->orWhere('nilai_pekerjaan_kontrak_tahun_berjalan', 'like', "%$search%")
                   ->orWhere('status', 'like', "%$search%")
-                  ->orWhere('account_marketing', 'like', "%$search%")
-                  ;
+                  ->orWhere('account_marketing', 'like', "%$search%");
             });
         }
-
+    
+        // Apply sorting
         $projects = $query->orderByRaw("
-        CASE
-            WHEN status = 'Selesai' THEN 1
-            WHEN status = 'Pembayaran' THEN 2
-            WHEN status = 'Implementasi' THEN 3
-            WHEN status = 'Follow Up' THEN 4
-            WHEN status = 'Postpone' THEN 5
-            ELSE 6
-        END
-    ")->orderBy('id')->paginate(10);
-        return view('monitoring', compact('projects'));
+            CASE
+                WHEN status = 'Selesai' THEN 1
+                WHEN status = 'Pembayaran' THEN 2
+                WHEN status = 'Implementasi' THEN 3
+                WHEN status = 'Follow Up' THEN 4
+                WHEN status = 'Postpone' THEN 5
+                ELSE 6
+            END
+        ")->orderBy('id')->paginate(10);
+
+        //dd($projects);
+
+        //count total nilai pekerjaan RKAP
+        $values_rkap = $query->pluck('nilai_pekerjaan_rkap');
+        $total_rkap = $values_rkap->sum();
+        $format_total = number_format($total_rkap, '0','.', '.');
+
+        $baseNumber = 0;
+        
+        //dd($total_rkap);
+
+    
+        return view('monitoring', compact('projects', 'format_total', 'baseNumber'));
     }
+    
 
     public function create()
     {

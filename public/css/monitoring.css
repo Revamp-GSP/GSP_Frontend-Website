@@ -1,5 +1,7 @@
 .main-selection {
     display: flex;
+    width: auto;
+    height: 30px;
 }
 
 .title {
@@ -15,7 +17,7 @@
 .selector-accountMarketing {
     margin-right: 20px;
     margin-left: 20px;
-    width: 25%; /* Adjust margin as needed */
+    width: 300px; /* Adjust margin as needed */
 }
 
 .calendar {
@@ -39,6 +41,11 @@
     border-radius: 5px;
     padding: 10px;
     background-color: #f9f9f9;
+}
+
+.table-responsive {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .table th {

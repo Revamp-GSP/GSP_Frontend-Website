@@ -270,5 +270,5 @@ body {
 
 .main-menu {
     display: grid;
-    grid-template-rows: 100px 300px auto auto;
+    grid-template-rows: 73px 72px 78px auto;
 }

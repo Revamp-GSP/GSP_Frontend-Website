@@ -8,6 +8,20 @@
 <div class="title">
     <a>Data Pelanggan</a>
 </div>
+<div class="searchBar">
+    <form action="/search" method="GET">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search..." name="search">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+    <!-- Display search results or other content here -->
+</div>
+<div class="title">
+    <a>Table Customers</a>
+</div>
 <div class="table-responsive">
     <table class="table">
         <thead>

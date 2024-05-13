@@ -23,11 +23,15 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        //dd($input);
+
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
+        {   
+            //dd("salom");
             return redirect('/dashboard');
 
         }else{
+            dd("babi");
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
         }

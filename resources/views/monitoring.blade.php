@@ -108,79 +108,60 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($projects as $project)
-                @php
-                    $totalNilaiRkap += $project->nilai_pekerjaan_rkap;
-                    $totalNilaiAktual += $project->nilai_pekerjaan_aktual;
-                    $totalNilaiKontrak += $project->nilai_pekerjaan_kontrak_tahun_berjalan;
-                @endphp
-                <tr>
-                    <td>{{ $baseNumber + $loop->index }}</td>
-                    <td>
-                        <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('projects.destroy', $project->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getStatusColor($project->status) }}">{{ $project->status }}</span>
-                    </td>
-                    <td>
-                        <a href="{{ route('projects.show', $project->nama_pekerjaan) }}">{{ $project->nama_pekerjaan }}</a>
-                    </td>
-                    <td>{{ $project->nama_service }}</td>
-                    <td>{{ number_format($project->nilai_pekerjaan_rkap, 0, ',', '.') }}</td>
-                    <td>{{ number_format($project->nilai_pekerjaan_aktual, 0, ',', '.') }}</td>
-                    <td>{{ number_format($project->nilai_pekerjaan_kontrak_tahun_berjalan, 0, ',', '.') }}</td>
-                    <td>{{ $project->plan_start_date }}</td>
-                    <td>{{ $project->plan_end_date }}</td>
-                    <td>{{ $project->actual_start_date }}</td>
-                    <td>{{ $project->actual_end_date }}</td>
-                    <td>{{ $project->account_marketing }}</td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->dirut) }}">{{ $project->dirut }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->dirop) }}">{{ $project->dirop }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->dirke) }}">{{ $project->dirke }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->kskmr) }}">{{ $project->kskmr }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->ksham) }}">{{ $project->ksham }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->msdmu) }}">{{ $project->msdmu }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->mkakt) }}">{{ $project->mkakt }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->mbilp) }}">{{ $project->mbilp }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->mppti) }}">{{ $project->mppti }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->mopti) }}">{{ $project->mopti }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->mbsar) }}">{{ $project->mbsar }}</span>
-                    </td>
-                    <td>
-                        <span class="status-btn" style="background-color: {{ getRasciColor($project->msadb) }}">{{ $project->msadb }}</span>
-                    </td>
-                </tr>
-            @endforeach
-
-
-
+            <tr>
+                <th scope="row">1</th>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+                <td class="text-center">Mark</td>
+            </tr>
         </tbody>
+        <tfoot>
+            <tr class="table">
+                <td colspan="6" class="text-right"><strong>Total</strong></td>
+                <td class="text-center">{{$format_total}}</td>
+                <td class="text-center">$35</td>
+                <td class="text-center">$35</td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+            </tr>
+      </tfoot>
     </table>
 </div>
 
