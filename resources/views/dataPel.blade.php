@@ -20,7 +20,7 @@
     <!-- Display search results or other content here -->
 </div>
 <div class="title">
-    <a>Table Customers</a>
+    
 </div>
 <div class="table-responsive">
     <table class="table">
@@ -41,7 +41,7 @@
             @endphp
             @foreach ($customers as $customer)
                 <tr>
-                    <td>1</td>
+                    <td>{{ $baseNumber + $loop->index }}</td>
                     <td>{{ $customer->id_pelanggan }}</td>
                     <td>{{ $customer->nama_pelanggan }}</td>
                     <td>{{ $customer->sebutan }}</td>

@@ -28,6 +28,13 @@
     border-radius: 5px;
 }
 
+.filter_cal {
+    background-color: rgb(0, 91, 144);
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
 .filters {
     margin-bottom: 20px;
 }
@@ -49,6 +56,13 @@
 }
 
 .table th {
+    background-color: rgb(0, 91, 144);
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.table tr {
     text-align: center;
     white-space: nowrap;
 }

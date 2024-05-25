@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+
 <!-- Link CSS -->
 <link rel="stylesheet" href="css/monitoring.css">
 
@@ -72,7 +73,7 @@
         <label for="end-date">End Date:</label>
         <input type="date" id="end-date">
 
-        <button onclick="filterCalendar()">Filter</button>
+        <button class="filter_cal" onclick="filterCalendar()">Filter</button>
     </div>
 </div>
 <div class="table-responsive">
@@ -109,41 +110,48 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">1</th>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
-                <td class="text-center">Mark</td>
+            @php
+                $baseNumber = ($projects->currentPage() - 1) * $projects->perPage() + 1;
+            @endphp
+            @foreach ($projects as $project)
+                <tr>
+                    <td>{{ $baseNumber + $loop->index }}</td>
+                    <td></td>
+                    <td>{{ $project->status }}</td>
+                    <td>{{ $project->nama_pelanggan }}</td>
+                    <td>{{ $project->nama_service }}</td>
+                    <td>{{ $project->nama_pekerjaan }}</td>
+                    <td>{{ $project->nilai_pekerjaan_rkap }}</td>
+                    <td>{{ $project->nilai_pekerjaan_aktual }}</td>
+                    <td>{{ $project->nilai_pekerjaan_kontrak_tahun_berjalan }}</td>
+                    <td>{{ $project->plan_start_date }}</td>
+                    <td>{{ $project->plan_end_date }}</td>
+                    <td>{{ $project->actual_start_date }}</td>
+                    <td>{{ $project->actual_end_date }}</td>
+                    <td>{{ $project->account_marketing }}</td>
+                    <td>{{ $project->dirut }}</td>
+                    <td>{{ $project->dirop }}</td>
+                    <td>{{ $project->dirke }}</td>
+                    <td>{{ $project->kskmr }}</td>
+                    <td>{{ $project->ksham }}</td>
+                    <td>{{ $project->msdmu }}</td>
+                    <td>{{ $project->mkakt }}</td>
+                    <td>{{ $project->mbilp }}</td>
+                    <td>{{ $project->mppti }}</td>
+                    <td>{{ $project->mopti }}</td>
+                    <td>{{ $project->mbsar }}</td>
+                    <td>{{ $project->msadb }}</td>
+                </tr>
+            @endforeach
             </tr>
         </tbody>
         <tfoot>
             <tr class="table">
-                <td colspan="6" class="text-right"><strong>Total</strong></td>
-                <td class="text-center">{{$format_total}}</td>
-                <td class="text-center">$35</td>
-                <td class="text-center">$35</td>
+                <td colspan="5" class="text-right"><strong>Total</strong></td>
                 <td class="text-center"></td>
+                <td class="text-center">{{$format_total}}</td>
+                <td class="text-center">{{$format_aktual}}</td>
+                <td class="text-center">{{$format_kontrak}}</td>
                 <td class="text-center"></td>
                 <td class="text-center"></td>
                 <td class="text-center"></td>

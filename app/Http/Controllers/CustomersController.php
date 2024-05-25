@@ -12,6 +12,8 @@ class CustomersController extends Controller
     {
         $query = Customers::query();
 
+        //dd($query);
+
         // Filter by customer ID
         if ($request->has('id_pelanggan')) {
             $query->where('id_pelanggan', $request->id_pelanggan);

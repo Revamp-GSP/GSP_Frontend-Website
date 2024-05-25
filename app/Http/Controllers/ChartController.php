@@ -12,7 +12,7 @@ class ChartController extends Controller
     {
         $query = project::query();
         $statusCounts = project::countStatus();
-        dd ($statusCounts);
+        //dd ($statusCounts);
         return view('Dashboard', compact('statusCounts'));
     }
 }

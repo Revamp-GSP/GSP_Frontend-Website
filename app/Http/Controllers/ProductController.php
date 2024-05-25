@@ -12,6 +12,8 @@ class ProductController extends Controller
     {
         $query = product::query();
 
+        //dd($query);
+
         // Filter by service ID
         if ($request->has('service_id')) {
             $query->where('id_service', $request->service_id);
@@ -32,7 +34,9 @@ class ProductController extends Controller
 
         $products = $query->orderBy('id_service')->paginate(10);
 
-        return view('products.index', compact('products'));
+        //dd($product);
+
+        return view('service', compact('products'));
     }
 
     public function create()

@@ -15,6 +15,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Script Chart.js -->
+    <script src="js/dashboard.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -71,7 +72,7 @@
         </li>
         <li class="profile">
           <div class="profile_details">
-            <img src="img/profile.png" alt="profile image">
+            <img src="img/mainProfile.png" alt="profile image">
             <div class="profile_content">
               <div class="name" style="color:black;">Park-Ri Zky</div>
               <div class="designation" style="color:black;">Business Development</div>
@@ -83,32 +84,29 @@
     </div>
     <div class="home-section">
       <div class="main-menu">
-        <div class="section-one">
-          <div class="card">
-            <div class="card-body">
-              <canvas id="myChart"></canvas>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <canvas id="myChart2"></canvas>
-            </div>
-          </div>
+        <div class="box small color1">
+          <h6 class="text1">Total Nilai Pekerjaan RKAP Saat Ini : </h6>
+          <h6>Rp {{$format_total}}</h6>
         </div>
-        <div class="card">
-          <div class="card-body">
-            <canvas id="myChart3"></canvas>
-          </div>
+        <div class="box small color2">
+          <h6 class="text2">Total Nilai Pekerjaan Aktual Saat Ini : </h6>
+          <h6 class="t2">Rp {{$format_aktual}}</h6>
         </div>
-        <div class="card">
-          <div class="card-body" style="margin: 40px 40px 20px 20px;">
-            
-          </div>
+        <div class="box small color3">
+          <h6 class="text3">Total Nilai Pekerjaan Kontrak Saat Ini : </h6>
+          <h6 class="t3">Rp {{$format_kontrak}}</h6>
         </div>
-        <div class="card">
-          <div class="card-body">
-            
-          </div>
+        <div class="box large middle">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="box large bottom">
+          <canvas id="myChart2"></canvas>
+        </div>
+        <div class="box large bottom">
+          <canvas id="myChart3"></canvas>
+        </div>
+        <div class="box large bottom">
+          <canvas id="myChart4"></canvas>
         </div>
       </div>
     </div>
@@ -121,21 +119,28 @@
 
       const statusProyek = document.getElementById('myChart');
       const persentaseProyek = document.getElementById('myChart2');
+      const keuanganProyek = document.getElementById('myChart3');
+      const layananProyek = document.getElementById('myChart4');
 
-      const labels = [
+      //const labels = [
+      //    "Postpone",
+      //    "Follow Up",
+      //    "Implementasi",
+      //    "Pembayaran",
+      //    "Selesai",
+      //];
+      new Chart(statusProyek, {
+        type: "bar",
+        data: {
+          labels: [
           "Postpone",
           "Follow Up",
           "Implementasi",
           "Pembayaran",
           "Selesai",
-      ];
-      new Chart(statusProyek, {
-        type: "bar",
-        data: {
-          labels: labels,
+      ],
           datasets: [
               {
-                axis: "y",
                 fill: false,
                 label: "Status Proyek",
                 data: [{{$count_postpone}}, {{$count_followUp}}, {{$count_implementasi}}, {{$count_pembayaran}}, {{$count_selesai}}],
@@ -174,7 +179,13 @@
       new Chart(persentaseProyek, {
         type: "doughnut",
         data: {
-          labels: labels,
+          labels: [
+          "Postpone",
+          "Follow Up",
+          "Implementasi",
+          "Pembayaran",
+          "Selesai",
+      ],
           datasets: [
               {
                 fill: false,
@@ -204,6 +215,99 @@
         },
         options: {
           indexAxis: "y",
+          scales: {
+            y: {
+                beginAtZero: true,
+            },
+          },
+          maintainAspectRatio: false, // Set to false to allow resizing
+        },
+      });
+      new Chart(keuanganProyek, {
+        type: "line",
+        data: {
+          labels: [
+          "RKAP",
+          "Aktual",
+          "Kontrak",
+      ],
+          datasets: [
+              {
+                axis: "x",
+                fill: false,
+                label: "Nilai Keuangan Proyek",
+                data: [{{$total_rkap}}, {{$total_aktual}}, {{$total_kontrak}}],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)",
+                ],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+        },
+        options: {
+          indexAxis: "x",
+          scales: {
+            y: {
+                beginAtZero: true,
+            },
+          },
+          maintainAspectRatio: false, // Set to false to allow resizing
+        },
+      });
+      new Chart(layananProyek, {
+        type: "polarArea",
+        data: {
+          labels: [
+          "Postpone",
+          "Follow Up",
+          "Implementasi",
+          "Pembayaran",
+          "Selesai",
+      ],
+          datasets: [
+              {
+                fill: false,
+                label: "Persentase Proyek",
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)",
+                ],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+        },
+        options: {
+          indexAxis: "x",
           scales: {
             y: {
                 beginAtZero: true,

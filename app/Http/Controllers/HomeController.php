@@ -27,6 +27,23 @@ class HomeController extends Controller
         //$status = $query->pluck('status');
         //$nama_pekerjaan = $query->pluck('nama_pekerjaan');
 
+        //count total nilai pekerjaan RKAP
+        $values_rkap = DB::table('projects');
+        $total_rkap = $values_rkap->sum('nilai_pekerjaan_rkap');
+        $format_total = number_format($total_rkap, '0','.', '.');
+
+        //count total nilai pekerjaan aktual
+        $values_aktual = DB::table('projects');
+        $total_aktual = $values_aktual->sum('nilai_pekerjaan_aktual');
+        $format_aktual = number_format($total_aktual, '0','.', '.');
+
+        //count total nilai pekerjaan kontrak / tahun berjalan
+        $values_kontrak = DB::table('projects');
+        $total_kontrak = $values_kontrak->sum('nilai_pekerjaan_kontrak_tahun_berjalan');
+        $format_kontrak = number_format($total_kontrak, '0','.', '.');
+
+        //dd($total_rkap);
+
         //count data postpone
         $query_postpone = DB::table('projects');
         $data_postpone = $query_postpone->where('status', 'Postpone')->get();
@@ -75,7 +92,7 @@ class HomeController extends Controller
 
         //dd($percentage_postpone);
 
-        return view('dashboard', compact('count_postpone', 'count_followUp', 'count_implementasi', 'count_pembayaran', 'count_selesai', 'percentage_postpone', 'percentage_followUp', 'percentage_implementasi', 'percentage_pembayaran', 'percentage_selesai'));
+        return view('dashboard', compact('count_postpone', 'count_followUp', 'count_implementasi', 'count_pembayaran', 'count_selesai', 'percentage_postpone', 'percentage_followUp', 'percentage_implementasi', 'percentage_pembayaran', 'percentage_selesai', 'format_total', 'format_aktual', 'format_kontrak', 'total_rkap', 'total_aktual', 'total_kontrak'));
 
     }
 }

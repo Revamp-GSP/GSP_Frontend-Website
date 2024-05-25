@@ -54,19 +54,30 @@ class ProjectsController extends Controller
             END
         ")->orderBy('id')->paginate(10);
 
-        //dd($projects);
+        //dd($query);
 
         //count total nilai pekerjaan RKAP
         $values_rkap = $query->pluck('nilai_pekerjaan_rkap');
         $total_rkap = $values_rkap->sum();
         $format_total = number_format($total_rkap, '0','.', '.');
 
+        //count total nilai pekerjaan aktual
+        $values_aktual = $query->pluck('nilai_pekerjaan_aktual');
+        $total_aktual = $values_aktual->sum();
+        $format_aktual = number_format($total_aktual, '0','.', '.');
+
+        //count total nilai pekerjaan kontrak / tahun berjalan
+        $values_kontrak = $query->pluck('nilai_pekerjaan_kontrak_tahun_berjalan');
+        $total_kontrak = $values_kontrak->sum();
+        $format_kontrak = number_format($total_kontrak, '0','.', '.');
+
+
         $baseNumber = 0;
         
         //dd($total_rkap);
 
     
-        return view('monitoring', compact('projects', 'format_total', 'baseNumber'));
+        return view('monitoring', compact('projects', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
     }
     
 
