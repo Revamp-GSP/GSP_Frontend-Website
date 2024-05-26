@@ -54,7 +54,6 @@ class ProjectsController extends Controller
             END
         ")->orderBy('id')->paginate(10);
 
-        //dd($query);
 
         //count total nilai pekerjaan RKAP
         $values_rkap = $query->pluck('nilai_pekerjaan_rkap');
@@ -233,5 +232,25 @@ class ProjectsController extends Controller
             'steps' => $steps,
             'currentStatus' => $currentStatus
         ]);
+    }
+
+    public function queryFilter(Request $request) {
+        $query = DB::table('projects');
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_pelanggan', 'like', "%$search%")
+                  ->orWhere('nama_service', 'like', "%$search%")
+                  ->orWhere('nama_pekerjaan', 'like', "%$search%")
+                  ->orWhere('nilai_pekerjaan_rkap', 'like', "%$search%")
+                  ->orWhere('id', 'like', "%$search%")
+                  ->orWhere('nilai_pekerjaan_rkap', 'like', "%$search%")
+                  ->orWhere('nilai_pekerjaan_aktual', 'like', "%$search%")
+                  ->orWhere('nilai_pekerjaan_kontrak_tahun_berjalan', 'like', "%$search%")
+                  ->orWhere('status', 'like', "%$search%")
+                  ->orWhere('account_marketing', 'like', "%$search%");
+            });
+        }
+        dd($query);
     }
 }

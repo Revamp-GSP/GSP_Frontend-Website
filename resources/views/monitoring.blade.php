@@ -9,9 +9,11 @@
     <a>Form Monitoring Pekerjaan</a>
 </div>
 <div class="main-selection">
+    <form action="/monitoring/query" method="post">
+    @csrf
     <div class="selector-service">
         <h6>Jenis Layanan</h6>
-        <select class="form-select" aria-label="Default select example">
+        <select name="search" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
             <option selected>Silahkan Pilih Layanan</option>
             <option value="1">Data Center</option>
             <option value="2">E-Payment</option>
@@ -28,6 +30,7 @@
             <option value="13">Web Apps</option>
         </select>
     </div>
+    </form>
     <div class="selector-status">
         <h6>Status</h6>
         <select class="form-select" aria-label="Default select example">
@@ -73,7 +76,7 @@
         <label for="end-date">End Date:</label>
         <input type="date" id="end-date">
 
-        <button class="filter_cal" onclick="filterCalendar()">Filter</button>
+        <button class="filter_cal" onclick="filterCalendar()" style="width:50px">Filter</button>
     </div>
 </div>
 <div class="table-responsive">
