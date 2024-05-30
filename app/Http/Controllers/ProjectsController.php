@@ -251,6 +251,6 @@ class ProjectsController extends Controller
                   ->orWhere('account_marketing', 'like', "%$search%");
             });
         }
-        dd($query);
+        //dd($query);
     }
 }

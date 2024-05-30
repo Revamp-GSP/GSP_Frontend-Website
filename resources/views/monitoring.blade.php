@@ -9,7 +9,7 @@
     <a>Form Monitoring Pekerjaan</a>
 </div>
 <div class="main-selection">
-    <form action="/monitoring/query" method="post">
+    <form action="/monitoring/query" method="POST">
     @csrf
     <div class="selector-service">
         <h6>Jenis Layanan</h6>
@@ -78,6 +78,17 @@
 
         <button class="filter_cal" onclick="filterCalendar()" style="width:50px">Filter</button>
     </div>
+    <div class="searchBar">
+        <form action="/search" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search..." name="search">
+                <button class="btn-search" type="submit">
+                    <i class='bx bx-search'></i>
+                </button>
+            </div>
+        </form>
+        <!-- Display search results or other content here -->
+    </div>
 </div>
 <div class="table-responsive">
     <table class="table">
@@ -123,7 +134,9 @@
                     <td>{{ $project->status }}</td>
                     <td>{{ $project->nama_pelanggan }}</td>
                     <td>{{ $project->nama_service }}</td>
-                    <td>{{ $project->nama_pekerjaan }}</td>
+                    <td>
+                        <a href="/task">{{ $project->nama_pekerjaan }}</a>
+                    </td>
                     <td>{{ $project->nilai_pekerjaan_rkap }}</td>
                     <td>{{ $project->nilai_pekerjaan_aktual }}</td>
                     <td>{{ $project->nilai_pekerjaan_kontrak_tahun_berjalan }}</td>

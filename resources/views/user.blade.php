@@ -26,9 +26,48 @@
             </label>
         </div>
         <div class="user-name">
-            <p>Park-Ri Zky</p>
+            <h4>Park-Ri Zky</h4>
+            <button class="edit-button">
+                <i class='bx bx-pencil'></i>
+                Edit
+            </button>
+            <p>Business Development</p>
+            <a>Bandung, Jawa Barat</a>
         </div>
 
+    </div>
+    <div class="details-container">
+        <div class="box large">
+            <div class="header">
+                <h5>Personal information</h5>
+                <button class="edit-button">
+                    <i class='bx bx-pencil'></i>
+                    Edit
+                </button>
+                <div class="info">
+                    <div class="info-row">
+                        <div class="info-label">First Name</div>
+                        <div class="info-value">Jack</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Last Name</div>
+                        <div class="info-value">Adams</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Email address</div>
+                        <div class="info-value">jackadams@gmail.com</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">(213) 555-1234</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Bio</div>
+                        <div class="info-value">Product Designer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

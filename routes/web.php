@@ -56,6 +56,12 @@ Route::get('/service', function () {
     ]);
 });
 
+Route::get('/task', function () {
+    return view('task', [
+        "title" => "Task",
+    ]);
+});
+
 
 Route::get('/dataPel', [CustomersController::class, 'index'])->name('customers.index');
 
