@@ -8,66 +8,64 @@
 <div class="title">
     <a>Form Monitoring Pekerjaan</a>
 </div>
+<form action="/monitoring/query" method="POST">
+@csrf
 <div class="main-selection">
-    <form action="/monitoring/query" method="POST">
-    @csrf
     <div class="selector-service">
         <h6>Jenis Layanan</h6>
-        <select name="search" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-            <option selected>Silahkan Pilih Layanan</option>
-            <option value="1">Data Center</option>
-            <option value="2">E-Payment</option>
-            <option value="3">ERP</option>
-            <option value="4">GesPay</option>
-            <option value="5">IT Service</option>
-            <option value="6">IT Service lainnya</option>
-            <option value="7">Jasa Aktivasi</option>
-            <option value="8">Jasa Serpo</option>
-            <option value="9">Jasa lainnya</option>
-            <option value="10">Mobile Apps</option>
-            <option value="11">Payment Gateway</option>
-            <option value="12">Seat Management</option>
-            <option value="13">Web Apps</option>
+        <select name="filter_layanan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="" selected >Silahkan Pilih Layanan</option>
+            <option value="Data Center">Data Center</option>
+            <option value="E-Payment">E-Payment</option>
+            <option value="ERP">ERP</option>
+            <option value="GesPay">GesPay</option>
+            <option value="IT-SERVICE">IT Service</option>
+            <option value="IT Service lainnya">IT Service lainnya</option>
+            <option value="Jasa Aktivasi">Jasa Aktivasi</option>
+            <option value="Jasa Serpo">Jasa Serpo</option>
+            <option value="Jasa lainnya">Jasa lainnya</option>
+            <option value="Mobile Apps">Mobile Apps</option>
+            <option value="Payment Gateway">Payment Gateway</option>
+            <option value="Seat Management">Seat Management</option>
+            <option value="Web Apps">Web Apps</option>
         </select>
     </div>
-    </form>
-    <div class="selector-status">
+    <div class="selector-status" >
         <h6>Status</h6>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Silahkan Pilih Status</option>
-            <option value="1">Postpone</option>
-            <option value="2">Follow Up</option>
-            <option value="3">Implementation</option>
-            <option value="4">Payment</option>
-            <option value="5">Finished</option>
+        <select name="filter_status" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="" selected>Silahkan Pilih Status</option>
+            <option value="Postpone">Postpone</option>
+            <option value="Follow up">Follow Up</option>
+            <option value="Implementation">Implementation</option>
+            <option value="Payment">Payment</option>
+            <option value="Finished">Finished</option>
         </select>
     </div>
     <div class="selector-pelanggan">
         <h6>Pelanggan</h6>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Silahkan Pilih Pelanggan</option>
-            <option value="1">PT. ABC</option>
-            <option value="2">PT. DEF</option>
-            <option value="3">PT. GHI</option>
-            <option value="4">PT. JKL</option>
-            <option value="5">PT. MNO</option>
+        <select name="filter_pelanggan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="" selected>Silahkan Pilih Pelanggan</option>
+            @foreach($projects as $project)
+            <option value="{{ $project->nama_pelanggan }}">{{ $project->nama_pelanggan }}</option>
+            @endforeach
         </select>
     </div>
     <div class="selector-accountMarketing">
         <h6>Account Marketing</h6>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Select On Option</option>
-            <option value="1">Administrator</option>
-            <option value="2">Busdev</option>
-            <option value="3">Direksi</option>
-            <option value="4">Manager Keuangan</option>
-            <option value="5">Manager Ophar</option>
-            <option value="6">Ophar</option>
-            <option value="7">Satuan Kinerja</option>
-            <option value="8">SDM</option>
+        <select name="filter_accountMarketing" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="" selected>Pilih Account Marketing</option>
+            <option value="Administrator">Administrator</option>
+            <option value="Busdev">Busdev</option>
+            <option value="Direksi">Direksi</option>
+            <option value="Manager Keuangan">Manager Keuangan</option>
+            <option value="Manager Opha">Manager Ophar</option>
+            <option value="Ophar">Ophar</option>
+            <option value="Satuan Kinerja">Satuan Kinerja</option>
+            <option value="SDM">SDM</option>
         </select>
     </div>
 </div>
+</form>
 <div class="calendar">
     <div class="filters">
         <label for="start-date">Start Date:</label>

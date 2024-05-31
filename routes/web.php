@@ -75,6 +75,7 @@ Route::post('/monitoring/query', [ProjectsController::class, 'queryFilter']);
 
 
 
+
 Route::get('/test', function () {
     return view('test');
 });

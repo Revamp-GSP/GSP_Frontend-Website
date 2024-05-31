@@ -236,21 +236,45 @@ class ProjectsController extends Controller
 
     public function queryFilter(Request $request) {
         $query = DB::table('projects');
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('nama_pelanggan', 'like', "%$search%")
-                  ->orWhere('nama_service', 'like', "%$search%")
-                  ->orWhere('nama_pekerjaan', 'like', "%$search%")
-                  ->orWhere('nilai_pekerjaan_rkap', 'like', "%$search%")
-                  ->orWhere('id', 'like', "%$search%")
-                  ->orWhere('nilai_pekerjaan_rkap', 'like', "%$search%")
-                  ->orWhere('nilai_pekerjaan_aktual', 'like', "%$search%")
-                  ->orWhere('nilai_pekerjaan_kontrak_tahun_berjalan', 'like', "%$search%")
-                  ->orWhere('status', 'like', "%$search%")
-                  ->orWhere('account_marketing', 'like', "%$search%");
-            });
+    
+        if ($request->filled('filter_layanan')) {
+            $query->where('nama_service', $request->filter_layanan);
         }
-        //dd($query);
+        if ($request->filled('filter_status')) {
+            $query->where('status', $request->filter_status);
+        }
+        if ($request->filled('filter_pelanggan')) {
+            $query->where('nama_pelanggan', $request->filter_pelanggan);
+        }
+        if ($request->filled('filter_accountMarketing')) {
+            $query->where('account_marketing', $request->filter_accountMarketing);
+        }
+    
+        $projects = $query->paginate(10);
+    
+        $values_rkap = $projects->pluck('nilai_pekerjaan_rkap');
+        $total_rkap = $values_rkap->sum();
+        $format_total = number_format($total_rkap, '0', '.', '.');
+    
+        //count total nilai pekerjaan aktual
+        $values_aktual = $projects->pluck('nilai_pekerjaan_aktual');
+        $total_aktual = $values_aktual->sum();
+        $format_aktual = number_format($total_aktual, '0', '.', '.');
+    
+        //count total nilai pekerjaan kontrak / tahun berjalan
+        $values_kontrak = $projects->pluck('nilai_pekerjaan_kontrak_tahun_berjalan');
+        $total_kontrak = $values_kontrak->sum();
+        $format_kontrak = number_format($total_kontrak, '0', '.', '.');
+    
+        $baseNumber = 0;
+
+        $request->session()->put('filter_layanan', $request->filter_layanan);
+        $request->session()->put('filter_status', $request->filter_status);
+        $request->session()->put('filter_pelanggan', $request->filter_pelanggan);
+        $request->session()->put('filter_accountMarketing', $request->filter_accountMarketing);
+
+    
+        return view('monitoringQuery', compact('projects', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
     }
+    
 }
