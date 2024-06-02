@@ -274,7 +274,7 @@ class ProjectsController extends Controller
         $request->session()->put('filter_accountMarketing', $request->filter_accountMarketing);
 
     
-        return view('monitoringQuery', compact('projects', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
+        return view('monitoring', compact('projects', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
     }
     
 }

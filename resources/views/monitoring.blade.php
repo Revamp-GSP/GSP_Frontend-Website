@@ -8,63 +8,107 @@
 <div class="title">
     <a>Form Monitoring Pekerjaan</a>
 </div>
-<form action="/monitoring/query" method="POST">
-@csrf
-<div class="main-selection">
-    <div class="selector-service">
-        <h6>Jenis Layanan</h6>
-        <select name="filter_layanan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-            <option value="" selected >Silahkan Pilih Layanan</option>
-            <option value="Data Center">Data Center</option>
-            <option value="E-Payment">E-Payment</option>
-            <option value="ERP">ERP</option>
-            <option value="GesPay">GesPay</option>
-            <option value="IT-SERVICE">IT Service</option>
-            <option value="IT Service lainnya">IT Service lainnya</option>
-            <option value="Jasa Aktivasi">Jasa Aktivasi</option>
-            <option value="Jasa Serpo">Jasa Serpo</option>
-            <option value="Jasa lainnya">Jasa lainnya</option>
-            <option value="Mobile Apps">Mobile Apps</option>
-            <option value="Payment Gateway">Payment Gateway</option>
-            <option value="Seat Management">Seat Management</option>
-            <option value="Web Apps">Web Apps</option>
-        </select>
+<form action="/monitoring" method="POST">
+    @csrf
+    <div class="main-selection">
+        <div class="selector-service">
+            <h6>Jenis Layanan</h6>
+            <select name="filter_layanan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+                <option value="" selected >Silahkan Pilih Layanan</option>
+                <option value="Data Center" {{ session('filter_layanan') == 'Data Center' ? 'selected' : '' }}>Data Center</option>
+                <option value="E-Payment" {{ session('filter_layanan') == 'E-Payment' ? 'selected' : '' }}>E-Payment</option>
+                <option value="ERP" {{ session('filter_layanan') == 'ERP' ? 'selected' : '' }}>ERP</option>
+                <option value="GesPay" {{ session('filter_layanan') == 'GesPay' ? 'selected' : '' }}>GesPay</option>
+                <option value="IT-SERVICE" {{ session('filter_layanan') == 'IT-SERVICE' ? 'selected' : '' }}>IT Service</option>
+                <option value="IT Service lainnya" {{ session('filter_layanan') == 'IT Service lainnya' ? 'selected' : '' }}>IT Service lainnya</option>
+                <option value="Jasa Aktivasi" {{ session('filter_layanan') == 'Jasa Aktivasi' ? 'selected' : '' }}>Jasa Aktivasi</option>
+                <option value="Jasa Serpo" {{ session('filter_layanan') == 'Jasa Serpo' ? 'selected' : '' }}>Jasa Serpo</option>
+                <option value="Jasa lainnya" {{ session('filter_layanan') == 'Jasa lainnya' ? 'selected' : '' }}>Jasa lainnya</option>
+                <option value="Mobile Apps" {{ session('filter_layanan') == 'Mobile Apps' ? 'selected' : '' }}>Mobile Apps</option>
+                <option value="Payment Gateway" {{ session('filter_layanan') == 'Payment Gateway' ? 'selected' : '' }}>Payment Gateway</option>
+                <option value="Seat Management" {{ session('filter_layanan') == 'Seat Management' ? 'selected' : '' }}>Seat Management</option>
+                <option value="Web Apps" {{ session('filter_layanan') == 'Web Apps' ? 'selected' : '' }}>Web Apps</option>
+            </select>
+        </div>
+        <div class="selector-status" >
+            <h6>Status</h6>
+            <select name="filter_status" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+                <option value="" selected>Silahkan Pilih Status</option>
+                <option value="Postpone" {{ session('filter_status') == 'Postpone' ? 'selected' : '' }}>Postpone</option>
+                <option value="Follow up" {{ session('filter_status') == 'Follow up' ? 'selected' : '' }}>Follow Up</option>
+                <option value="Implementation" {{ session('filter_status') == 'Implementation' ? 'selected' : '' }}>Implementation</option>
+                <option value="Payment" {{ session('filter_status') == 'Payment' ? 'selected' : '' }}>Payment</option>
+                <option value="Finished" {{ session('filter_status') == 'Finished' ? 'selected' : '' }}>Finished</option>
+            </select>
+        </div>
+        <div class="selector-pelanggan">
+            <h6>Pelanggan</h6>
+            <select name="filter_pelanggan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+                <option value="" selected>Silahkan Pilih Pelanggan</option>
+                @foreach($projects as $project)
+                <option value="{{ $project->nama_pelanggan }}" {{ session('filter_pelanggan') == $project->nama_pelanggan ? 'selected' : '' }}>
+                {{ $project->nama_pelanggan }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="selector-accountMarketing">
+            <h6>Account Marketing</h6>
+            <select name="filter_accountMarketing" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+                <option value="">None</option>
+                <optgroup label="Administrator">
+                    <option value="Ahmad Gunawan" {{ session('filter_accountMarketing') == 'Ahmad Gunawan' ? 'selected' : '' }}>Ahmad Gunawan</option>
+                    <option value="Sugih Permana" {{ session('filter_accountMarketing') == 'Sugih Permana' ? 'selected' : '' }}>Sugih Permana</option>
+                    <option value="Yana Nugraha" {{ session('filter_accountMarketing') == 'Yana Nugraha' ? 'selected' : '' }}>Yana Nugraha</option>
+                </optgroup>
+                <optgroup label="Busdev">
+                    <option value="Admin Sales" {{ session('filter_accountMarketing') == 'Admin Sales' ? 'selected' : '' }}>Admin Sales</option>
+                    <option value="Alia Almitra" {{ session('filter_accountMarketing') == 'Alia Almitra' ? 'selected' : '' }}>Alia Almitra</option>
+                    <option value="Aufa Putra" {{ session('filter_accountMarketing') == 'Aufa Putra' ? 'selected' : '' }}>Aufa Putra</option>
+                    <option value="Desiana Latief" {{ session('filter_accountMarketing') == 'Desiana Latief' ? 'selected' : '' }}>Desiana Latief</option>
+                    <option value="Greyta Sarah" {{ session('filter_accountMarketing') == 'Greyta Sarah' ? 'selected' : '' }}>Greyta Sarah</option>
+                    <option value="Hadi Mustofa" {{ session('filter_accountMarketing') == 'Hadi Mustofa' ? 'selected' : '' }}>Hadi Mustofa</option>
+                    <option value="Harry Fitriana" {{ session('filter_accountMarketing') == 'Harry Fitriana' ? 'selected' : '' }}>Harry Fitriana</option>
+                    <option value="Isma Soraya" {{ session('filter_accountMarketing') == 'Isma Soraya' ? 'selected' : '' }}>Isma Soraya</option>
+                    <option value="Johanes B. Indra" {{ session('filter_accountMarketing') == 'Johanes B. Indra' ? 'selected' : '' }}>Johanes B. Indra</option>
+                    <option value="Mulyana Santosa" {{ session('filter_accountMarketing') == 'Mulyana Santosa' ? 'selected' : '' }}>Mulyana Santosa</option>
+                    <option value="Olley Mosye" {{ session('filter_accountMarketing') == 'Olley Mosye' ? 'selected' : '' }}>Olley Mosye</option>
+                    <option value="Ramdani Apriansyah" {{ session('filter_accountMarketing') == 'Ramdani Apriansyah' ? 'selected' : '' }}>Ramdani Apriansyah</option>
+                    <option value="Ryan Apriantho" {{ session('filter_accountMarketing') == 'Ryan Apriantho' ? 'selected' : '' }}>Ryan Apriantho</option>
+                    <option value="Sarah Thoharhatunissa" {{ session('filter_accountMarketing') == 'Sarah Thoharhatunissa' ? 'selected' : '' }}>Sarah Thoharhatunissa</option>
+                    <option value="Topan Permata" {{ session('filter_accountMarketing') == 'Topan Permata' ? 'selected' : '' }}>Topan Permata</option>
+                    <option value="Winda Sundayani" {{ session('filter_accountMarketing') == 'Winda Sundayani' ? 'selected' : '' }}>Winda Sundayani</option>
+                </optgroup>
+                <optgroup label="Direksi">
+                    <option value="Bayu Mahendra" {{ session('filter_accountMarketing') == 'Bayu Mahendra' ? 'selected' : '' }}>Bayu Mahendra</option>
+                    <option value="Burhanuddin -" {{ session('filter_accountMarketing') == 'Burhanuddin -' ? 'selected' : '' }}>Burhanuddin -</option>
+                    <option value="Ruly Fasri" {{ session('filter_accountMarketing') == 'Ruly Fasri' ? 'selected' : '' }}>Ruly Fasri</option>
+                </optgroup>
+                <optgroup label="Manager Keuangan">
+                    <option value="Elsa Marina" {{ session('filter_accountMarketing') == 'Elsa Marina' ? 'selected' : '' }}>Elsa Marina</option>
+                    <option value="Oki Satrya" {{ session('filter_accountMarketing') == 'Oki Satrya' ? 'selected' : '' }}>Oki Satrya </option>
+                    <option value="Taufik Munandar" {{ session('filter_accountMarketing') == 'Taufik Munandar' ? 'selected' : '' }}>Taufik Munandar</option>
+                </optgroup>
+                <optgroup label="Manager Ophar">
+                    <option value="Dadang Sutriaman" {{ session('filter_accountMarketing') == 'Dadang Sutriaman' ? 'selected' : '' }}>Dadang Sutriaman</option>
+                </optgroup>  
+                <optgroup label="Ophar">
+                    <option value="Asep Nugroho" {{ session('filter_accountMarketing') == 'Asep Nugroho' ? 'selected' : '' }}>Asep Nugroho</option>
+                    <option value="Dadang Sutriaman" {{ session('filter_accountMarketing') == 'Dadang Sutriaman' ? 'selected' : '' }}>Dadang Sutriaman</option>
+                    <option value="Fauzy Dalil Mutaqin" {{ session('filter_accountMarketing') == 'Fauzy Dalil Mutaqin' ? 'selected' : '' }}>Fauzy Dalil Mutaqin</option>
+                    <option value="M. Hafila Hardenera" {{ session('filter_accountMarketing') == 'M. Hafila Hardenera' ? 'selected' : '' }}>M. Hafila Hardenera</option>
+                    <option value="Umi Kencanawati" {{ session('filter_accountMarketing') == 'Umi Kencanawati' ? 'selected' : '' }}>Umi Kencanawati</option>
+                </optgroup>
+                <optgroup label="Sat Kinerja">
+                    <option value="Hernowo Hardono" {{ session('filter_accountMarketing') == 'Hernowo Hardono' ? 'selected' : '' }}>Hernowo Hardono</option>
+                </optgroup>      
+                <optgroup label="SDM">
+                    <option value="Agus Salam" {{ session('filter_accountMarketing') == 'Agus Salam' ? 'selected' : '' }}>Agus Salam</option>
+                    <option value="Teddy R. Asmara" {{ session('filter_accountMarketing') == 'Teddy R. Asmara' ? 'selected' : '' }}>Teddy R. Asmara</option>
+                </optgroup>                
+            </select>
+        </div>
     </div>
-    <div class="selector-status" >
-        <h6>Status</h6>
-        <select name="filter_status" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-            <option value="" selected>Silahkan Pilih Status</option>
-            <option value="Postpone">Postpone</option>
-            <option value="Follow up">Follow Up</option>
-            <option value="Implementation">Implementation</option>
-            <option value="Payment">Payment</option>
-            <option value="Finished">Finished</option>
-        </select>
-    </div>
-    <div class="selector-pelanggan">
-        <h6>Pelanggan</h6>
-        <select name="filter_pelanggan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-            <option value="" selected>Silahkan Pilih Pelanggan</option>
-            @foreach($projects as $project)
-            <option value="{{ $project->nama_pelanggan }}">{{ $project->nama_pelanggan }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="selector-accountMarketing">
-        <h6>Account Marketing</h6>
-        <select name="filter_accountMarketing" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-            <option value="" selected>Pilih Account Marketing</option>
-            <option value="Administrator">Administrator</option>
-            <option value="Busdev">Busdev</option>
-            <option value="Direksi">Direksi</option>
-            <option value="Manager Keuangan">Manager Keuangan</option>
-            <option value="Manager Opha">Manager Ophar</option>
-            <option value="Ophar">Ophar</option>
-            <option value="Satuan Kinerja">Satuan Kinerja</option>
-            <option value="SDM">SDM</option>
-        </select>
-    </div>
-</div>
 </form>
 <div class="calendar">
     <div class="filters">
@@ -87,347 +131,350 @@
         </form>
         <!-- Display search results or other content here -->
     </div>
-    <div class="add-Data">
-        <!-- Button modal addData -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">
-            Tambah Data
-        </button>
-  
-        <!-- Modal addData -->
-        <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addDataLabel">Tambah Data</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-form-tab" data-bs-toggle="tab" data-bs-target="#nav-form" type="button" role="tab" aria-controls="nav-form" aria-selected="true">Input Pekerjaan</button>
-                            <button class="nav-link" id="nav-rasci-tab" data-bs-toggle="tab" data-bs-target="#nav-rasci" type="button" role="tab" aria-controls="nav-rasci" aria-selected="false">RASCI</button>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab" tabindex="0">
-                                <div class="form-group">
-                                    <label for="">Nama Pekerjaan:</label>
-                                    <input type="text" class="form-control" id="">
+    <form action="/monitoring" method="POST">
+        @csrf
+        <div class="add-Data">
+            <!-- Button modal addData -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">
+                Tambah Data
+            </button>
+    
+            <!-- Modal addData -->
+            <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addDataLabel">Tambah Data</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-form-tab" data-bs-toggle="tab" data-bs-target="#nav-form" type="button" role="tab" aria-controls="nav-form" aria-selected="true">Input Pekerjaan</button>
+                                <button class="nav-link" id="nav-rasci-tab" data-bs-toggle="tab" data-bs-target="#nav-rasci" type="button" role="tab" aria-controls="nav-rasci" aria-selected="false">RASCI</button>
                                 </div>
-                                <!-- form untuk jenis layanan -->
-                                <div class="form-group">
-                                    <label for="nama_service">Jenis Layanan:</label>
-                                    <select name="nama_service" id="nama_service" class="form-control" required>
-                                        <option value="">Pilih Jenis Layanan</option>
-                                        
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Nilai Pekerjaan RKAP:</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Nilai Pekerjaan Aktual:</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Nilai Pekerjaan Kontrak:</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama_pelanggan">Nama Pelanggan:</label>
-                                    <select name="nama_pelanggan" id="nama_pelanggan" class="form-control" required>
-                                        <option value="">Pilih Nama Pelanggan</option>
-                                        
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="start-date">Plan Start Date:</label>
-                                    <input type="date" id="plan-start-date" style="width: 440px;">
-                                </div>
-                                <div class="form-group">
-                                    <label for="start-date">Plan End Date:</label>
-                                    <input type="date" id="plan-end-date" style="width: 448px;">
-                                </div>
-                                <div class="form-group">
-                                    <label for="start-date">Actual Start Date:</label>
-                                    <input type="date" id="actual-start-date" style="width: 423px;">
-                                </div>
-                                <div class="form-group">
-                                    <label for="start-date">Actual End Date:</label>
-                                    <input type="date" id="actual-end-date" style="width: 431px;">
-                                </div>
-                                <div class="form-group">
-                                    <label for="status">Status:</label>
-                                    <select name="status" id="status" class="form-control" required>
-                                        <option value="Pending">Postpone</option>
-                                        <option value="Follow Up">Follow Up</option>
-                                        <option value="Implementasi">Implementasi</option>
-                                        <option value="Payment">Payment</option>
-                                        <option value="Finished">Finished</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="account_marketing">Account Marketing:</label>
-                                    <select name="account_marketing" id="account_marketing" class="form-control" required>
-                                        <option value="">None</option>
-                                        <optgroup label="Administrator">
-                                            <option value="Ahmad Gunawan">Ahmad Gunawan</option>
-                                            <option value="Sugih Permana">Sugih Permana</option>
-                                            <option value="Yana Nugraha">Yana Nugraha</option>
-                                        </optgroup>
-                                        <optgroup label="Busdev">
-                                            <option value="Admin Sales">Admin Sales</option>
-                                            <option value="Alia Almitra">Alia Almitra</option>
-                                            <option value="Aufa Putra">Aufa Putra</option>
-                                            <option value="Desiana Latief">Desiana Latief</option>
-                                            <option value="Greyta Sarah">Greyta Sarah</option>
-                                            <option value="Hadi Mustofa">Hadi Mustofa</option>
-                                            <option value="Harry Fitriana">Harry Fitriana</option>
-                                            <option value="Isma Soraya">Isma Soraya</option>
-                                            <option value="Johanes B. Indra">Johanes B. Indra</option>
-                                            <option value="Mulyana Santosa">Mulyana Santosa</option>
-                                            <option value="Olley Mosye">Olley Mosye</option>
-                                            <option value="Ramdani Apriansyah">Ramdani Apriansyah</option>
-                                            <option value="Ryan Apriantho">Ryan Apriantho</option>
-                                            <option value="Sarah Thoharhatunissa">Sarah Thoharhatunissa</option>
-                                            <option value="Topan Permata">Topan Permata</option>
-                                            <option value="Winda Sundayani">Winda Sundayani</option>
-                                        </optgroup>
-                                        <optgroup label="Direksi">
-                                            <option value="Bayu Mahendra">Bayu Mahendra</option>
-                                            <option value="Burhanuddin -">Burhanuddin -</option>
-                                            <option value="Ruly Fasri">Ruly Fasri</option>
-                                        </optgroup>
-                                        <optgroup label="Manager Keuangan">
-                                            <option value="Elsa Marina">Elsa Marina</option>
-                                            <option value="Oki Satrya">Oki Satrya </option>
-                                            <option value="Taufik Munandar">Taufik Munandar</option>
-                                        </optgroup>
-                                        <optgroup label="Manager Ophar">
-                                            <option value="Dadang Sutriaman">Dadang Sutriaman</option>
-                                        </optgroup>  
-                                        <optgroup label="Ophar">
-                                            <option value="Asep Nugroho">Asep Nugroho</option>
-                                            <option value="Dadang Sutriaman">Dadang Sutriaman</option>
-                                            <option value="Fauzy Dalil Mutaqin">Fauzy Dalil Mutaqin</option>
-                                            <option value="M. Hafila Hardenera">M. Hafila Hardenera</option>
-                                            <option value="Umi Kencanawati">Umi Kencanawati</option>
-                                        </optgroup>
-                                        <optgroup label="Sat Kinerja">
-                                            <option value="32">Hernowo Hardono</option>
-                                        </optgroup>      
-                                        <optgroup label="SDM">
-                                            <option value="Agus Salam">Agus Salam</option>
-                                            <option value="Teddy R. Asmara">Teddy R. Asmara</option>
-                                        </optgroup>                
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav-rasci" role="tabpanel" aria-labelledby="nav-rasci-tab" tabindex="0">
-                                <!-- Radio buttons for DIRUT -->
-                                <div class="form-group">
-                                    <label for="dirut">DIRUT:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_dirut_responsible" name="dirut" value="Responsible">
-                                        <label for="rasci_dirut_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_dirut_accountable" name="dirut" value="Accountable">
-                                        <label for="rasci_dirut_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_dirut_support" name="dirut" value="Support">
-                                        <label for="rasci_dirut_support">Support</label>
-                                        <input type="radio" id="rasci_dirut_consulted" name="dirut" value="Consulted">
-                                        <label for="rasci_dirut_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_dirut_informed" name="dirut" value="Informed">
-                                        <label for="rasci_dirut_informed">Informed</label>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab" tabindex="0">
+                                    <div class="form-group">
+                                        <label for="">Nama Pekerjaan:</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <!-- form untuk jenis layanan -->
+                                    <div class="form-group">
+                                        <label for="nama_service">Jenis Layanan:</label>
+                                        <select name="nama_service" id="nama_service" class="form-control" required>
+                                            <option value="">Pilih Jenis Layanan</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Nilai Pekerjaan RKAP:</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Nilai Pekerjaan Aktual:</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Nilai Pekerjaan Kontrak:</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama_pelanggan">Nama Pelanggan:</label>
+                                        <select name="nama_pelanggan" id="nama_pelanggan" class="form-control" required>
+                                            <option value="">Pilih Nama Pelanggan</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start-date">Plan Start Date:</label>
+                                        <input type="date" id="plan-start-date" style="width: 440px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start-date">Plan End Date:</label>
+                                        <input type="date" id="plan-end-date" style="width: 448px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start-date">Actual Start Date:</label>
+                                        <input type="date" id="actual-start-date" style="width: 423px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start-date">Actual End Date:</label>
+                                        <input type="date" id="actual-end-date" style="width: 431px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status:</label>
+                                        <select name="status" id="status" class="form-control" required>
+                                            <option value="Pending">Postpone</option>
+                                            <option value="Follow Up">Follow Up</option>
+                                            <option value="Implementasi">Implementasi</option>
+                                            <option value="Payment">Payment</option>
+                                            <option value="Finished">Finished</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="account_marketing">Account Marketing:</label>
+                                        <select name="account_marketing" id="account_marketing" class="form-control" required>
+                                            <option value="">None</option>
+                                            <optgroup label="Administrator">
+                                                <option value="Ahmad Gunawan">Ahmad Gunawan</option>
+                                                <option value="Sugih Permana">Sugih Permana</option>
+                                                <option value="Yana Nugraha">Yana Nugraha</option>
+                                            </optgroup>
+                                            <optgroup label="Busdev">
+                                                <option value="Admin Sales">Admin Sales</option>
+                                                <option value="Alia Almitra">Alia Almitra</option>
+                                                <option value="Aufa Putra">Aufa Putra</option>
+                                                <option value="Desiana Latief">Desiana Latief</option>
+                                                <option value="Greyta Sarah">Greyta Sarah</option>
+                                                <option value="Hadi Mustofa">Hadi Mustofa</option>
+                                                <option value="Harry Fitriana">Harry Fitriana</option>
+                                                <option value="Isma Soraya">Isma Soraya</option>
+                                                <option value="Johanes B. Indra">Johanes B. Indra</option>
+                                                <option value="Mulyana Santosa">Mulyana Santosa</option>
+                                                <option value="Olley Mosye">Olley Mosye</option>
+                                                <option value="Ramdani Apriansyah">Ramdani Apriansyah</option>
+                                                <option value="Ryan Apriantho">Ryan Apriantho</option>
+                                                <option value="Sarah Thoharhatunissa">Sarah Thoharhatunissa</option>
+                                                <option value="Topan Permata">Topan Permata</option>
+                                                <option value="Winda Sundayani">Winda Sundayani</option>
+                                            </optgroup>
+                                            <optgroup label="Direksi">
+                                                <option value="Bayu Mahendra">Bayu Mahendra</option>
+                                                <option value="Burhanuddin -">Burhanuddin -</option>
+                                                <option value="Ruly Fasri">Ruly Fasri</option>
+                                            </optgroup>
+                                            <optgroup label="Manager Keuangan">
+                                                <option value="Elsa Marina">Elsa Marina</option>
+                                                <option value="Oki Satrya">Oki Satrya </option>
+                                                <option value="Taufik Munandar">Taufik Munandar</option>
+                                            </optgroup>
+                                            <optgroup label="Manager Ophar">
+                                                <option value="Dadang Sutriaman">Dadang Sutriaman</option>
+                                            </optgroup>  
+                                            <optgroup label="Ophar">
+                                                <option value="Asep Nugroho">Asep Nugroho</option>
+                                                <option value="Dadang Sutriaman">Dadang Sutriaman</option>
+                                                <option value="Fauzy Dalil Mutaqin">Fauzy Dalil Mutaqin</option>
+                                                <option value="M. Hafila Hardenera">M. Hafila Hardenera</option>
+                                                <option value="Umi Kencanawati">Umi Kencanawati</option>
+                                            </optgroup>
+                                            <optgroup label="Sat Kinerja">
+                                                <option value="32">Hernowo Hardono</option>
+                                            </optgroup>      
+                                            <optgroup label="SDM">
+                                                <option value="Agus Salam">Agus Salam</option>
+                                                <option value="Teddy R. Asmara">Teddy R. Asmara</option>
+                                            </optgroup>                
+                                        </select>
                                     </div>
                                 </div>
-                                <!-- Radio buttons for DIROP -->
-                                <div class="form-group">
-                                    <label for="dirop">DIROP:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_dirop_responsible" name="dirop" value="Responsible">
-                                        <label for="rasci_dirop_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_dirop_accountable" name="dirop" value="Accountable">
-                                        <label for="rasci_dirop_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_dirop_support" name="dirop" value="Support">
-                                        <label for="rasci_dirop_support">Support</label>
-                                        <input type="radio" id="rasci_dirop_consulted" name="dirop" value="Consulted">
-                                        <label for="rasci_dirop_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_dirop_informed" name="dirop" value="Informed">
-                                        <label for="rasci_dirop_informed">Informed</label>
+                                <div class="tab-pane fade" id="nav-rasci" role="tabpanel" aria-labelledby="nav-rasci-tab" tabindex="0">
+                                    <!-- Radio buttons for DIRUT -->
+                                    <div class="form-group">
+                                        <label for="dirut">DIRUT:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_dirut_responsible" name="dirut" value="Responsible">
+                                            <label for="rasci_dirut_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_dirut_accountable" name="dirut" value="Accountable">
+                                            <label for="rasci_dirut_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_dirut_support" name="dirut" value="Support">
+                                            <label for="rasci_dirut_support">Support</label>
+                                            <input type="radio" id="rasci_dirut_consulted" name="dirut" value="Consulted">
+                                            <label for="rasci_dirut_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_dirut_informed" name="dirut" value="Informed">
+                                            <label for="rasci_dirut_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for DIRKE -->
-                                <div class="form-group">
-                                    <label for="dirke">DIRKE:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_dirke_responsible" name="dirke" value="Responsible">
-                                        <label for="rasci_dirke_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_dirke_accountable" name="dirke" value="Accountable">
-                                        <label for="rasci_dirke_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_dirke_support" name="dirke" value="Support">
-                                        <label for="rasci_dirke_support">Support</label>
-                                        <input type="radio" id="rasci_dirke_consulted" name="dirke" value="Consulted">
-                                        <label for="rasci_dirke_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_dirke_informed" name="dirke" value="Informed">
-                                        <label for="rasci_dirke_informed">Informed</label>
+                                    <!-- Radio buttons for DIROP -->
+                                    <div class="form-group">
+                                        <label for="dirop">DIROP:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_dirop_responsible" name="dirop" value="Responsible">
+                                            <label for="rasci_dirop_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_dirop_accountable" name="dirop" value="Accountable">
+                                            <label for="rasci_dirop_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_dirop_support" name="dirop" value="Support">
+                                            <label for="rasci_dirop_support">Support</label>
+                                            <input type="radio" id="rasci_dirop_consulted" name="dirop" value="Consulted">
+                                            <label for="rasci_dirop_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_dirop_informed" name="dirop" value="Informed">
+                                            <label for="rasci_dirop_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for KSKMR -->
-                                <div class="form-group">
-                                    <label for="kskmr">KSKMR:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_kskmr_responsible" name="kskmr" value="Responsible">
-                                        <label for="rasci_kskmr_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_kskmr_accountable" name="kskmr" value="Accountable">
-                                        <label for="rasci_kskmr_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_kskmr_support" name="kskmr" value="Support">
-                                        <label for="rasci_kskmr_support">Support</label>
-                                        <input type="radio" id="rasci_kskmr_consulted" name="kskmr" value="Consulted">
-                                        <label for="rasci_kskmr_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_kskmr_informed" name="kskmr" value="Informed">
-                                        <label for="rasci_kskmr_informed">Informed</label>
+                                    <!-- Radio buttons for DIRKE -->
+                                    <div class="form-group">
+                                        <label for="dirke">DIRKE:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_dirke_responsible" name="dirke" value="Responsible">
+                                            <label for="rasci_dirke_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_dirke_accountable" name="dirke" value="Accountable">
+                                            <label for="rasci_dirke_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_dirke_support" name="dirke" value="Support">
+                                            <label for="rasci_dirke_support">Support</label>
+                                            <input type="radio" id="rasci_dirke_consulted" name="dirke" value="Consulted">
+                                            <label for="rasci_dirke_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_dirke_informed" name="dirke" value="Informed">
+                                            <label for="rasci_dirke_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for KSHAM -->
-                                <div class="form-group">
-                                    <label for="ksham">KSHAM:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_ksham_responsible" name="ksham" value="Responsible">
-                                        <label for="rasci_ksham_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_ksham_accountable" name="ksham" value="Accountable">
-                                        <label for="rasci_ksham_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_ksham_support" name="ksham" value="Support">
-                                        <label for="rasci_ksham_support">Support</label>
-                                        <input type="radio" id="rasci_ksham_consulted" name="ksham" value="Consulted">
-                                        <label for="rasci_ksham_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_ksham_informed" name="ksham" value="Informed">
-                                        <label for="rasci_ksham_informed">Informed</label>
+                                    <!-- Radio buttons for KSKMR -->
+                                    <div class="form-group">
+                                        <label for="kskmr">KSKMR:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_kskmr_responsible" name="kskmr" value="Responsible">
+                                            <label for="rasci_kskmr_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_kskmr_accountable" name="kskmr" value="Accountable">
+                                            <label for="rasci_kskmr_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_kskmr_support" name="kskmr" value="Support">
+                                            <label for="rasci_kskmr_support">Support</label>
+                                            <input type="radio" id="rasci_kskmr_consulted" name="kskmr" value="Consulted">
+                                            <label for="rasci_kskmr_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_kskmr_informed" name="kskmr" value="Informed">
+                                            <label for="rasci_kskmr_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MSDMU -->
-                                <div class="form-group">
-                                    <label for="msdmu">MSDMU:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_msdmu_responsible" name="msdmu" value="Responsible">
-                                        <label for="rasci_msdmu_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_msdmu_accountable" name="msdmu" value="Accountable">
-                                        <label for="rasci_msdmu_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_msdmu_support" name="msdmu" value="Support">
-                                        <label for="rasci_msdmu_support">Support</label>
-                                        <input type="radio" id="rasci_msdmu_consulted" name="msdmu" value="Consulted">
-                                        <label for="rasci_msdmu_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_msdmu_informed" name="msdmu" value="Informed">
-                                        <label for="rasci_msdmu_informed">Informed</label>
+                                    <!-- Radio buttons for KSHAM -->
+                                    <div class="form-group">
+                                        <label for="ksham">KSHAM:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_ksham_responsible" name="ksham" value="Responsible">
+                                            <label for="rasci_ksham_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_ksham_accountable" name="ksham" value="Accountable">
+                                            <label for="rasci_ksham_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_ksham_support" name="ksham" value="Support">
+                                            <label for="rasci_ksham_support">Support</label>
+                                            <input type="radio" id="rasci_ksham_consulted" name="ksham" value="Consulted">
+                                            <label for="rasci_ksham_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_ksham_informed" name="ksham" value="Informed">
+                                            <label for="rasci_ksham_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MKAKT -->
-                                <div class="form-group">
-                                    <label for="mkakt">MKAKT:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_mkakt_responsible" name="mkakt" value="Responsible">
-                                        <label for="rasci_mkakt_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_mkakt_accountable" name="mkakt" value="Accountable">
-                                        <label for="rasci_mkakt_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_mkakt_support" name="mkakt" value="Support">
-                                        <label for="rasci_mkakt_support">Support</label>
-                                        <input type="radio" id="rasci_mkakt_consulted" name="mkakt" value="Consulted">
-                                        <label for="rasci_mkakt_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_mkakt_informed" name="mkakt" value="Informed">
-                                        <label for="rasci_mkakt_informed">Informed</label>
+                                    <!-- Radio buttons for MSDMU -->
+                                    <div class="form-group">
+                                        <label for="msdmu">MSDMU:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_msdmu_responsible" name="msdmu" value="Responsible">
+                                            <label for="rasci_msdmu_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_msdmu_accountable" name="msdmu" value="Accountable">
+                                            <label for="rasci_msdmu_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_msdmu_support" name="msdmu" value="Support">
+                                            <label for="rasci_msdmu_support">Support</label>
+                                            <input type="radio" id="rasci_msdmu_consulted" name="msdmu" value="Consulted">
+                                            <label for="rasci_msdmu_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_msdmu_informed" name="msdmu" value="Informed">
+                                            <label for="rasci_msdmu_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MBILP -->
-                                <div class="form-group">
-                                    <label for="mbilp">MBILP:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_mbilp_responsible" name="mbilp" value="Responsible">
-                                        <label for="rasci_mbilp_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_mbilp_accountable" name="mbilp" value="Accountable">
-                                        <label for="rasci_mbilp_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_mbilp_support" name="mbilp" value="Support">
-                                        <label for="rasci_mbilp_support">Support</label>
-                                        <input type="radio" id="rasci_mbilp_consulted" name="mbilp" value="Consulted">
-                                        <label for="rasci_mbilp_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_mbilp_informed" name="mbilp" value="Informed">
-                                        <label for="rasci_mbilp_informed">Informed</label>
+                                    <!-- Radio buttons for MKAKT -->
+                                    <div class="form-group">
+                                        <label for="mkakt">MKAKT:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_mkakt_responsible" name="mkakt" value="Responsible">
+                                            <label for="rasci_mkakt_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_mkakt_accountable" name="mkakt" value="Accountable">
+                                            <label for="rasci_mkakt_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_mkakt_support" name="mkakt" value="Support">
+                                            <label for="rasci_mkakt_support">Support</label>
+                                            <input type="radio" id="rasci_mkakt_consulted" name="mkakt" value="Consulted">
+                                            <label for="rasci_mkakt_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_mkakt_informed" name="mkakt" value="Informed">
+                                            <label for="rasci_mkakt_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MPPTI -->
-                                <div class="form-group">
-                                    <label for="mppti">MPPTI:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_mppti_responsible" name="mppti" value="Responsible">
-                                        <label for="rasci_mppti_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_mppti_accountable" name="mppti" value="Accountable">
-                                        <label for="rasci_mppti_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_mppti_support" name="mppti" value="Support">
-                                        <label for="rasci_mppti_support">Support</label>
-                                        <input type="radio" id="rasci_mppti_consulted" name="mppti" value="Consulted">
-                                        <label for="rasci_mppti_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_mppti_informed" name="mppti" value="Informed">
-                                        <label for="rasci_mppti_informed">Informed</label>
+                                    <!-- Radio buttons for MBILP -->
+                                    <div class="form-group">
+                                        <label for="mbilp">MBILP:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_mbilp_responsible" name="mbilp" value="Responsible">
+                                            <label for="rasci_mbilp_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_mbilp_accountable" name="mbilp" value="Accountable">
+                                            <label for="rasci_mbilp_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_mbilp_support" name="mbilp" value="Support">
+                                            <label for="rasci_mbilp_support">Support</label>
+                                            <input type="radio" id="rasci_mbilp_consulted" name="mbilp" value="Consulted">
+                                            <label for="rasci_mbilp_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_mbilp_informed" name="mbilp" value="Informed">
+                                            <label for="rasci_mbilp_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MOPTI -->
-                                <div class="form-group">
-                                    <label for="mopti">MOPTI:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_mopti_responsible" name="mopti" value="Responsible">
-                                        <label for="rasci_mopti_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_mopti_accountable" name="mopti" value="Accountable">
-                                        <label for="rasci_mopti_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_mopti_support" name="mopti" value="Support">
-                                        <label for="rasci_mopti_support">Support</label>
-                                        <input type="radio" id="rasci_mopti_consulted" name="mopti" value="Consulted">
-                                        <label for="rasci_mopti_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_mopti_informed" name="mopti" value="Informed">
-                                        <label for="rasci_mopti_informed">Informed</label>
+                                    <!-- Radio buttons for MPPTI -->
+                                    <div class="form-group">
+                                        <label for="mppti">MPPTI:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_mppti_responsible" name="mppti" value="Responsible">
+                                            <label for="rasci_mppti_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_mppti_accountable" name="mppti" value="Accountable">
+                                            <label for="rasci_mppti_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_mppti_support" name="mppti" value="Support">
+                                            <label for="rasci_mppti_support">Support</label>
+                                            <input type="radio" id="rasci_mppti_consulted" name="mppti" value="Consulted">
+                                            <label for="rasci_mppti_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_mppti_informed" name="mppti" value="Informed">
+                                            <label for="rasci_mppti_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MBSAR -->
-                                <div class="form-group">
-                                    <label for="mbsar">MBSAR:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_mbsar_responsible" name="mbsar" value="Responsible">
-                                        <label for="rasci_mbsar_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_mbsar_accountable" name="mbsar" value="Accountable">
-                                        <label for="rasci_mbsar_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_mbsar_support" name="mbsar" value="Support">
-                                        <label for="rasci_mbsar_support">Support</label>
-                                        <input type="radio" id="rasci_mbsar_consulted" name="mbsar" value="Consulted">
-                                        <label for="rasci_mbsar_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_mbsar_informed" name="mbsar" value="Informed">
-                                        <label for="rasci_mbsar_informed">Informed</label>
+                                    <!-- Radio buttons for MOPTI -->
+                                    <div class="form-group">
+                                        <label for="mopti">MOPTI:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_mopti_responsible" name="mopti" value="Responsible">
+                                            <label for="rasci_mopti_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_mopti_accountable" name="mopti" value="Accountable">
+                                            <label for="rasci_mopti_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_mopti_support" name="mopti" value="Support">
+                                            <label for="rasci_mopti_support">Support</label>
+                                            <input type="radio" id="rasci_mopti_consulted" name="mopti" value="Consulted">
+                                            <label for="rasci_mopti_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_mopti_informed" name="mopti" value="Informed">
+                                            <label for="rasci_mopti_informed">Informed</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Radio buttons for MSADB -->
-                                <div class="form-group">
-                                    <label for="msadb">MSADB:</label>
-                                    <div class="radio-buttons">
-                                        <input type="radio" id="rasci_msadb_responsible" name="msadb" value="Responsible">
-                                        <label for="rasci_msadb_responsible">Responsible</label>
-                                        <input type="radio" id="rasci_msadb_accountable" name="msadb" value="Accountable">
-                                        <label for="rasci_msadb_accountable">Accountable</label>
-                                        <input type="radio" id="rasci_msadb_support" name="msadb" value="Support">
-                                        <label for="rasci_msadb_support">Support</label>
-                                        <input type="radio" id="rasci_msadb_consulted" name="msadb" value="Consulted">
-                                        <label for="rasci_msadb_consulted">Consulted</label>
-                                        <input type="radio" id="rasci_msadb_informed" name="msadb" value="Informed">
-                                        <label for="rasci_msadb_informed">Informed</label>
+                                    <!-- Radio buttons for MBSAR -->
+                                    <div class="form-group">
+                                        <label for="mbsar">MBSAR:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_mbsar_responsible" name="mbsar" value="Responsible">
+                                            <label for="rasci_mbsar_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_mbsar_accountable" name="mbsar" value="Accountable">
+                                            <label for="rasci_mbsar_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_mbsar_support" name="mbsar" value="Support">
+                                            <label for="rasci_mbsar_support">Support</label>
+                                            <input type="radio" id="rasci_mbsar_consulted" name="mbsar" value="Consulted">
+                                            <label for="rasci_mbsar_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_mbsar_informed" name="mbsar" value="Informed">
+                                            <label for="rasci_mbsar_informed">Informed</label>
+                                        </div>
+                                    </div>
+                                    <!-- Radio buttons for MSADB -->
+                                    <div class="form-group">
+                                        <label for="msadb">MSADB:</label>
+                                        <div class="radio-buttons">
+                                            <input type="radio" id="rasci_msadb_responsible" name="msadb" value="Responsible">
+                                            <label for="rasci_msadb_responsible">Responsible</label>
+                                            <input type="radio" id="rasci_msadb_accountable" name="msadb" value="Accountable">
+                                            <label for="rasci_msadb_accountable">Accountable</label>
+                                            <input type="radio" id="rasci_msadb_support" name="msadb" value="Support">
+                                            <label for="rasci_msadb_support">Support</label>
+                                            <input type="radio" id="rasci_msadb_consulted" name="msadb" value="Consulted">
+                                            <label for="rasci_msadb_consulted">Consulted</label>
+                                            <input type="radio" id="rasci_msadb_informed" name="msadb" value="Informed">
+                                            <label for="rasci_msadb_informed">Informed</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Submit</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 <div class="table-responsive">
     <table class="table">

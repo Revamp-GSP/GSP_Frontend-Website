@@ -18,7 +18,6 @@
     margin-right: 20px;
     margin-left: 20px;
     width: 300px; /* Adjust margin as needed */
-
 }
 
 .filters-row {
@@ -40,7 +39,7 @@
 
 .searchBar {
     width: 300px;
-    margin: -33px 0px 0px 545px;
+    margin: -33px 0px 0px 590px;
 }
 
 .btn-search {
@@ -53,7 +52,7 @@
 }
 
 .filters {
-    margin-bottom: 20px;
+    margin: 15px 0px 0px 23px;
 }
 
 .filters label {
@@ -69,6 +68,7 @@
 
 .add-Data {
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 .modal-backdrop {

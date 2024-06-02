@@ -69,7 +69,10 @@ Route::get('/service', [ProductController::class, 'index'])->name('product.index
 
 Route::get('/monitoring', [ProjectsController::class, 'index'])->name('project.index');
 
-Route::post('/monitoring/query', [ProjectsController::class, 'queryFilter']);
+Route::post('/monitoring', [ProjectsController::class, 'queryFilter']);
+
+
+
 
 Route::get('/monitoring/{nama_pekerjaan}', [ProjectsController::class, 'show'])->name('projects.show');
 
