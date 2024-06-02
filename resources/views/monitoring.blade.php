@@ -14,7 +14,7 @@
         <div class="selector-service">
             <h6>Jenis Layanan</h6>
             <select name="filter_layanan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-                <option value="" selected >Silahkan Pilih Layanan</option>
+                <option value="reset" selected >Silahkan Pilih Layanan</option>
                 <option value="Data Center" {{ session('filter_layanan') == 'Data Center' ? 'selected' : '' }}>Data Center</option>
                 <option value="E-Payment" {{ session('filter_layanan') == 'E-Payment' ? 'selected' : '' }}>E-Payment</option>
                 <option value="ERP" {{ session('filter_layanan') == 'ERP' ? 'selected' : '' }}>ERP</option>
@@ -33,7 +33,7 @@
         <div class="selector-status" >
             <h6>Status</h6>
             <select name="filter_status" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-                <option value="" selected>Silahkan Pilih Status</option>
+                <option value="reset" selected>Silahkan Pilih Status</option>
                 <option value="Postpone" {{ session('filter_status') == 'Postpone' ? 'selected' : '' }}>Postpone</option>
                 <option value="Follow up" {{ session('filter_status') == 'Follow up' ? 'selected' : '' }}>Follow Up</option>
                 <option value="Implementation" {{ session('filter_status') == 'Implementation' ? 'selected' : '' }}>Implementation</option>
@@ -44,7 +44,7 @@
         <div class="selector-pelanggan">
             <h6>Pelanggan</h6>
             <select name="filter_pelanggan" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-                <option value="" selected>Silahkan Pilih Pelanggan</option>
+                <option value="reset" selected>Silahkan Pilih Pelanggan</option>
                 @foreach($projects as $project)
                 <option value="{{ $project->nama_pelanggan }}" {{ session('filter_pelanggan') == $project->nama_pelanggan ? 'selected' : '' }}>
                 {{ $project->nama_pelanggan }}
@@ -55,7 +55,7 @@
         <div class="selector-accountMarketing">
             <h6>Account Marketing</h6>
             <select name="filter_accountMarketing" class="form-select" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
-                <option value="">None</option>
+                <option value="reset">Pilih Account Marketing</option>
                 <optgroup label="Administrator">
                     <option value="Ahmad Gunawan" {{ session('filter_accountMarketing') == 'Ahmad Gunawan' ? 'selected' : '' }}>Ahmad Gunawan</option>
                     <option value="Sugih Permana" {{ session('filter_accountMarketing') == 'Sugih Permana' ? 'selected' : '' }}>Sugih Permana</option>
