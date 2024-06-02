@@ -4,6 +4,17 @@
     height: 30px;
 }
 
+.container-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Opsional: Mengatur margin antara tombol */
+.con-edit, .con-del {
+    margin-right: 5px;
+}
+
 .title {
     color: rgb(0, 91, 144);
     font-size: 20px;

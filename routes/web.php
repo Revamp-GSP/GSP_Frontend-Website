@@ -71,6 +71,7 @@ Route::get('/monitoring', [ProjectsController::class, 'index'])->name('project.i
 
 Route::post('/monitoring', [ProjectsController::class, 'queryFilter']);
 Route::post('/monitoring/add-data', [ProjectsController::class, 'store']);
+Route::post('/monitoring/data/delete/{id}', [ProjectsController::class, 'deleteData']);
 
 
 

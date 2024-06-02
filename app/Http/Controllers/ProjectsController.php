@@ -230,6 +230,17 @@ class ProjectsController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
     }
 
+    public function deleteData($id){
+        //dd($id);
+        $deleted = DB::table('projects')->where('id', $id)->delete();
+
+        if($deleted){
+            return redirect()->back()->with('success', 'Data deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to delete data.');
+        }
+    }
+
     public function show($nama_pekerjaan)
     {
         // Cari proyek berdasarkan nama pekerjaan

@@ -526,12 +526,25 @@
                 <tr>
                     <td>{{ $baseNumber + $loop->index }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">
-                            <i class='bx bxs-edit'></i>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <i class='bx bxs-trash' ></i>
-                        </button>
+                        <div class="container-button">
+                            <div class="con-edit">
+                                <form action="" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">
+                                    <i class='bx bxs-edit'></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="con-del">
+                                <form action="monitoring/data/delete/{{$project->id}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class='bx bxs-trash' ></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        
                     </td>
                     <td>{{ $project->status }}</td>
                     <td>{{ $project->nama_pelanggan }}</td>
