@@ -270,58 +270,104 @@ body {
 
 .main-menu {
     display: grid;
-    grid-template-rows: 70px 70px auto;
-    width: 90%;
+    grid-template-rows: 70px 70px 300px 300px 300px 300px 300px 300px 300px 300px 300px auto;
+    width: 100%;
 }
 
 .title {
-    color: #11235a;
+    color: #000000;
     margin-left: 20px;
     margin-top: 20px;
 }
 
 /* PROGRESS BAR */
 .bar {
-  --d: 1rem;       /* arrow depth */
-  --gap: 0.3rem;   /* arrow thickness, gap */
+    --d: 1rem; /* arrow depth */
+    --gap: 0.3rem; /* arrow thickness, gap */
 
-  display: flex;
-  margin-right: var(--d);
-  margin-left: 20px;
+    display: flex;
+    margin-right: var(--d);
+    margin-left: 20px;
 }
 
 .bar-step {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0.6rem var(--d);
-  margin-right: calc(var(--d) * -1 + var(--gap));
-  background: #d9e3f7;
-  color: #23468c;
-  clip-path: polygon(
-    0% 0%,
-    calc(100% - var(--d)) 0%,
-    100% 50%,
-    calc(100% - var(--d)) 100%,
-    0% 100%,
-    var(--d) 50%
-  );
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.6rem var(--d);
+    margin-right: calc(var(--d) * -1 + var(--gap));
+    background: #d9e3f7;
+    color: #23468c;
+    clip-path: polygon(
+        0% 0%,
+        calc(100% - var(--d)) 0%,
+        100% 50%,
+        calc(100% - var(--d)) 100%,
+        0% 100%,
+        var(--d) 50%
+    );
 }
 
 .bar-step:first-child {
-  clip-path: polygon(
-    0% 0%,
-    calc(100% - var(--d)) 0%,
-    100% 50%,
-    calc(100% - var(--d)) 100%,
-    0% 100%
-  );
+    clip-path: polygon(
+        0% 0%,
+        calc(100% - var(--d)) 0%,
+        100% 50%,
+        calc(100% - var(--d)) 100%,
+        0% 100%
+    );
 }
 
 .bar-step.active {
-  background: #23468c;
-  color: #fff;
+    background: #23468c;
+    color: #fff;
 }
 /* PROGRESS BAR */
+
+.modal-backdrop {
+    z-index: 1;
+}
+
+.modal-body {
+    width: 300px;
+    margin-left: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 450px;
+}
+
+.toggle-section {
+    margin: 20px 20px 20px 20px;
+}
+
+.toggle-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    background-color: #00577d;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.toggle-button:hover {
+    background-color: #002d41;
+}
+
+.toggle-content {
+    display: none;
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 10px;
+}

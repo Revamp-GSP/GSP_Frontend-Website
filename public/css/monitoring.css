@@ -20,7 +20,7 @@
     width: 300px; /* Adjust margin as needed */
 }
 
-.calendar {
+.filters-row {
     width: 600px;
     height: 0px;
     margin: 0px 0px 0px 0px;
@@ -39,7 +39,7 @@
 
 .searchBar {
     width: 300px;
-    margin:-54px 0px 0px 570px;
+    margin: -33px 0px 0px 545px;
 }
 
 .btn-search {
@@ -64,6 +64,22 @@
     border-radius: 5px;
     padding: 10px;
     background-color: #f9f9f9;
+}
+
+.add-Data {
+    margin-top: 10px;
+}
+
+.modal-backdrop {
+    z-index: 1;
+}
+
+.modal-content {
+    width: 600px;
+}
+
+.form-group {
+    margin-bottom: 15px;
 }
 
 .table-responsive {

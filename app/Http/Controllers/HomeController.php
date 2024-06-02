@@ -71,9 +71,11 @@ class HomeController extends Controller
         // Calculate percentage
         $percentage_implementasi = ($count_implementasi / $total_records) * 100;
 
+        //dd($count_implementasi);
+
         //count data pembayaran
         $query_pembayaran = DB::table('projects');
-        $data_pembayaran = $query_pembayaran->where('status', 'Pembayaran')->get();
+        $data_pembayaran = $query_pembayaran->where('status', 'Payment')->get();
         $count_pembayaran = count($data_pembayaran);
         // Get total number of records
         $total_records = DB::table('projects')->count();
@@ -82,7 +84,7 @@ class HomeController extends Controller
 
         //count data selesai
         $query_selesai = DB::table('projects');
-        $data_selesai = $query_selesai->where('status', 'Selesai')->get();
+        $data_selesai = $query_selesai->where('status', 'Finished')->get();
         $count_selesai = count($data_selesai);
         // Get total number of records
         $total_records = DB::table('projects')->count();

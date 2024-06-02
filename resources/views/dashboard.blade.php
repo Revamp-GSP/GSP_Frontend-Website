@@ -273,17 +273,15 @@
         type: "polarArea",
         data: {
           labels: [
-          "Postpone",
-          "Follow Up",
-          "Implementasi",
-          "Pembayaran",
-          "Selesai",
+          "RKAP",
+          "Aktual",
+          "Kontrak",
       ],
           datasets: [
               {
                 fill: false,
                 label: "Persentase Proyek",
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: [{{$total_rkap}}, {{$total_aktual}}, {{$total_kontrak}}],
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
                     "rgba(255, 159, 64, 0.2)",
