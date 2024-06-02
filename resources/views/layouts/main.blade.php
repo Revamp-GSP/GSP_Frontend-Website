@@ -81,13 +81,7 @@
       </ul>
     </div>
     <div class="home-section">
-      @guest
-        @if (Route::has('login'))
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-          </li>
-        @endif
-      @endguest
+
       <div class="main-menu">
         @yield('container')
       </div>

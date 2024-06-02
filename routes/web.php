@@ -77,6 +77,7 @@ Route::post('/monitoring/{nama_pekerjaan}/task', [ProjectsController::class, 'st
 
 
 
+
 Route::get('/test', function () {
     return view('test');
 });
