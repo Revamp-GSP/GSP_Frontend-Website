@@ -131,7 +131,7 @@
         </form>
         <!-- Display search results or other content here -->
     </div>
-    <form action="/monitoring" method="POST">
+    <form action="/monitoring/add-data" method="POST">
         @csrf
         <div class="add-Data">
             <!-- Button modal addData -->
@@ -158,50 +158,59 @@
                                 <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab" tabindex="0">
                                     <div class="form-group">
                                         <label for="">Nama Pekerjaan:</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input name="nama_pekerjaan" type="text" class="form-control" id="">
                                     </div>
                                     <!-- form untuk jenis layanan -->
                                     <div class="form-group">
                                         <label for="nama_service">Jenis Layanan:</label>
                                         <select name="nama_service" id="nama_service" class="form-control" required>
-                                            <option value="">Pilih Jenis Layanan</option>
-                                            
+                                            <option selected >Silahkan Pilih Layanan</option>
+                                            <option value="Data Center">Data Center</option>
+                                            <option value="E-Payment">E-Payment</option>
+                                            <option value="ERP">ERP</option>
+                                            <option value="GesPay">GesPay</option>
+                                            <option value="IT Service">IT Service</option>
+                                            <option value="IT Service lainnya">IT Service lainnya</option>
+                                            <option value="Jasa Aktivasi">Jasa Aktivasi</option>
+                                            <option value="Jasa Serpo">Jasa Serpo</option>
+                                            <option value="Jasa lainnya">Jasa lainnya</option>
+                                            <option value="Mobile Apps">Mobile Apps</option>
+                                            <option value="Payment Gateway">Payment Gateway</option>
+                                            <option value="Seat Management">Seat Management</option>
+                                            <option value="Web Apps">Web Apps</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Nilai Pekerjaan RKAP:</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input name="nilai_pekerjaan_rkap" type="text" class="form-control" id="">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Nilai Pekerjaan Aktual:</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input name="nilai_pekerjaan_aktual" type="text" class="form-control" id="">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Nilai Pekerjaan Kontrak:</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input name="nilai_pekerjaan_kontrak_tahun_berjalan" type="text" class="form-control" id="">
                                     </div>
                                     <div class="form-group">
-                                        <label for="nama_pelanggan">Nama Pelanggan:</label>
-                                        <select name="nama_pelanggan" id="nama_pelanggan" class="form-control" required>
-                                            <option value="">Pilih Nama Pelanggan</option>
-                                            
-                                        </select>
+                                        <label for="">Nama Pelanggan:</label>
+                                        <input name="nama_pelanggan" type="text" class="form-control" id="">
                                     </div>
                                     <div class="form-group">
                                         <label for="start-date">Plan Start Date:</label>
-                                        <input type="date" id="plan-start-date" style="width: 440px;">
+                                        <input name="plan_start_date" type="date" id="plan-start-date" style="width: 440px;">
                                     </div>
                                     <div class="form-group">
-                                        <label for="start-date">Plan End Date:</label>
-                                        <input type="date" id="plan-end-date" style="width: 448px;">
+                                        <label for="end-date">Plan End Date: &nbsp</label>
+                                        <input name="plan_end_date" type="date" id="plan-end-date" style="width: 440px;">
                                     </div>
                                     <div class="form-group">
-                                        <label for="start-date">Actual Start Date:</label>
-                                        <input type="date" id="actual-start-date" style="width: 423px;">
+                                        <label for="start-date">Actual Start Date: &nbsp</label>
+                                        <input name="actual_start_date" type="date" id="actual-start-date" style="width: 440px;">
                                     </div>
                                     <div class="form-group">
                                         <label for="start-date">Actual End Date:</label>
-                                        <input type="date" id="actual-end-date" style="width: 431px;">
+                                        <input name="actual_end_date" type="date" id="actual-end-date" style="width: 440px;">
                                     </div>
                                     <div class="form-group">
                                         <label for="status">Status:</label>
@@ -468,7 +477,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
                 </div>

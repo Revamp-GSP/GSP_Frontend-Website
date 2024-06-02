@@ -89,9 +89,9 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
+
+        //dd($request);
         $validator = Validator::make($request->all(), [
-            'customer_id' => 'sometimes|exists:customers,id',
-            'product_id' => 'sometimes|exists:produks,id',
             'status' => 'required',
             'nama_pelanggan' => 'required',
             'nama_service' => 'required',
@@ -123,12 +123,38 @@ class ProjectsController extends Controller
         }
         
 
-        project::create($request->all());
-        $customer = customers::firstOrCreate(['nama_pelanggan' => $request->nama_pelanggan]);
+        DB::table('projects')->insert([
+            'status' => $request->status,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'nama_service' => $request->nama_service,
+            'nama_pekerjaan' => $request->nama_pekerjaan,
+            'nilai_pekerjaan_rkap' => $request->nilai_pekerjaan_rkap,
+            'nilai_pekerjaan_aktual' => $request->nilai_pekerjaan_aktual,
+            'nilai_pekerjaan_kontrak_tahun_berjalan' => $request->nilai_pekerjaan_kontrak_tahun_berjalan,
+            'plan_start_date' => $request->plan_start_date,
+            'plan_end_date' => $request->plan_end_date,
+            'actual_start_date' => $request->actual_start_date,
+            'actual_end_date' => $request->actual_end_date,
+            'account_marketing' => $request->account_marketing,
+            'dirut' => $request->dirut,
+            'dirop' => $request->dirop,
+            'dirke' => $request->dirke,
+            'kskmr' => $request->kskmr,
+            'ksham' => $request->ksham,
+            'msdmu' => $request->msdmu,
+            'mkakt' => $request->mkakt,
+            'mbilp' => $request->mbilp,
+            'mppti' => $request->mppti,
+            'mopti' => $request->mopti,
+            'mbsar' => $request->mbsar,
+            'msadb' => $request->msadb,
+        ]);
+        
+        //$customer = customers::firstOrCreate(['nama_pelanggan' => $request->nama_pelanggan]);
 
-        $produk = product::firstOrCreate(['nama_service' => $request->nama_service]);
+        //$produk = product::firstOrCreate(['nama_service' => $request->nama_service]);
 
-        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+        return redirect('/monitoring');
     }
 
     public function edit($id)
