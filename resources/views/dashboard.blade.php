@@ -65,10 +65,10 @@
         </li>
         <li>
           <a href="#">
-            <i class="bx bx-cog"></i>
-            <span class="link_name" style="margin-left:30px;">Settings</span>
+            <i class='bx bxs-bell-ring'></i>
+            <span class="link_name" style="margin-left:30px;">Notifications</span>
           </a>
-          <span class="tooltip">Settings</span>
+          <span class="tooltip">Notifications</span>
         </li>
         <li class="profile">
           <div class="profile_details">

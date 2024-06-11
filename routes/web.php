@@ -68,9 +68,11 @@ Route::get('/dataPel', [CustomersController::class, 'index'])->name('customers.i
 Route::get('/service', [ProductController::class, 'index'])->name('product.index');
 
 Route::get('/monitoring', [ProjectsController::class, 'index'])->name('project.index');
-
+Route::post('/monitoring', [ProjectsController::class, 'store'])->name('project.store');
 Route::post('/monitoring', [ProjectsController::class, 'queryFilter']);
 Route::post('/monitoring/add-data', [ProjectsController::class, 'store']);
+Route::post('/monitoring/data/edit/{id}', [ProjectsController::class, 'editData'])->name('editData');
+Route::put('/monitoring/data/update/{id}', [ProjectsController::class, 'update'])->name('update');
 Route::post('/monitoring/data/delete/{id}', [ProjectsController::class, 'deleteData']);
 
 
@@ -78,7 +80,7 @@ Route::post('/monitoring/data/delete/{id}', [ProjectsController::class, 'deleteD
 
 Route::get('/monitoring/{nama_pekerjaan}', [ProjectsController::class, 'show'])->name('projects.show');
 
-Route::post('/monitoring/{nama_pekerjaan}/task', [ProjectsController::class, 'storeTask']);
+Route::post('/task', [ProjectsController::class, 'storeTask']);
 
 
 

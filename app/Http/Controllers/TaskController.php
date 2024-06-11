@@ -54,6 +54,6 @@ class TaskController extends Controller
         //dd($tasks);
 
         // Kembalikan tampilan tabel tugas dalam bentuk HTML
-        return view('tasks.table', ['tasks' => $tasks])->render();
+        return view('/tasks', ['tasks' => $tasks])->render();
     }
 }

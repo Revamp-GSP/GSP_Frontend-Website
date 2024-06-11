@@ -157,7 +157,7 @@ class ProjectsController extends Controller
         return redirect('/monitoring');
     }
 
-    public function edit($id)
+    public function editData($id)
     {
         $project = project::findOrFail($id);
         $produks = product::all();
@@ -176,7 +176,7 @@ class ProjectsController extends Controller
                 'options' => $options,
             ];
         });
-        return view('projects.editprojects', compact('project', 'produks', 'customers', 'grouped_account_marketing'));
+        return view('/monitoring', compact('project', 'produks', 'customers', 'grouped_account_marketing'));
     }
 
     public function update(Request $request, $id)
@@ -215,19 +215,12 @@ class ProjectsController extends Controller
             
         }
 
-        $project = project::findOrFail($id);
-        $customer = customers::firstOrCreate(['nama_pelanggan' => $request->nama_pelanggan]);
-
-        $produk = product::firstOrCreate(['nama_service' => $request->nama_service]);
+        $project = Project::findOrFail($id);
+        $customers = Customers::firstOrCreate(['nama_pelanggan' => $request->nama_pelanggan]);
+        $produks = Product::firstOrCreate(['nama_service' => $request->nama_service]);
         $project->update($request->all());
 
-        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
-    }
-
-    public function destroy($id)
-    {
-        project::findOrFail($id)->delete();
-        return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('project.index')->with('success', 'Project updated successfully.');
     }
 
     public function deleteData($id){

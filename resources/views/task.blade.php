@@ -5,7 +5,7 @@
 <script src="js/task.js"></script>
 
 <div class="title">
-    <h4>Proyek Pengadaan Smartphone PT ICON+ SBU JABAR</h4>
+    <h4>{{ $project->nama_pekerjaan }}</h4>
 </div>
 <div class="bar">
   <div class="bar-step active">Postpone</div>
