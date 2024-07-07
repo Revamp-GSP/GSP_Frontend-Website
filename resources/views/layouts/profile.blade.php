@@ -62,7 +62,7 @@
           <span class="tooltip">Services</span>
         </li>
         <li>
-          <a href="#">
+          <a href="/notification">
             <i class='bx bxs-bell-ring'></i>
             <span class="link_name" style="margin-left:30px;">Notifications</span>
           </a>
