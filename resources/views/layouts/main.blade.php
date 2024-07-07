@@ -62,7 +62,7 @@
           <span class="tooltip">Services</span>
         </li>
         <li>
-          <a href="/notification">
+          <a href="#">
             <i class='bx bxs-bell-ring'></i>
             <span class="link_name" style="margin-left:30px;">Notifications</span>
           </a>
@@ -91,5 +91,16 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <!-- js -->
     <script src="js/sidebar.js"></script>
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    const logOutButton = document.getElementById('log_out');
+
+    if (logOutButton) {
+        logOutButton.addEventListener('click', function() {
+            window.location.href = '/logout';
+        });
+    }
+});
+    </script>
   </body>
 </html>

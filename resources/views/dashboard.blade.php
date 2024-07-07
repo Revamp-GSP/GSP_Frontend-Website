@@ -314,6 +314,16 @@
           maintainAspectRatio: false, // Set to false to allow resizing
         },
       });
+
+      document.addEventListener('DOMContentLoaded', function() {
+    const logOutButton = document.getElementById('log_out');
+
+    if (logOutButton) {
+        logOutButton.addEventListener('click', function() {
+            window.location.href = '/logout';
+        });
+    }
+});
     </script>
   </body>
 </html>

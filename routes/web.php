@@ -67,9 +67,9 @@ Route::get('/dataPel', [CustomersController::class, 'index'])->name('customers.i
 
 Route::get('/service', [ProductController::class, 'index'])->name('product.index');
 
-Route::get('/monitoring', [ProjectsController::class, 'index'])->name('project.index');
-Route::post('/monitoring', [ProjectsController::class, 'store'])->name('project.store');
-Route::post('/monitoring', [ProjectsController::class, 'queryFilter']);
+Route::get('/monitoring', [ProjectsController::class, 'index'])->name('project.index')->middleware('auth');
+Route::post('/monitoring', [ProjectsController::class, 'store'])->name('project.store')->middleware('auth');
+Route::post('/monitoring', [ProjectsController::class, 'queryFilter'])->middleware('auth');
 Route::post('/monitoring/add-data', [ProjectsController::class, 'store']);
 Route::post('/monitoring/data/edit/{id}', [ProjectsController::class, 'editData'])->name('editData');
 Route::put('/monitoring/data/update/{id}', [ProjectsController::class, 'update'])->name('update');

@@ -88,5 +88,16 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <!-- js -->
     <script src="js/sidebar.js"></script>
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    const logOutButton = document.getElementById('log_out');
+
+    if (logOutButton) {
+        logOutButton.addEventListener('click', function() {
+            window.location.href = '/logout';
+        });
+    }
+});
+    </script>
   </body>
 </html>
