@@ -13,16 +13,17 @@ class ProjectsController extends Controller
     public function index(Request $request)
     {
         $query = DB::table('projects');
+
+        //dd($request->date_range_start);
     
-        // Conditionally apply date range filter
         if ($request->has('date_range_start') && $request->has('date_range_end')) {
             $dateRangeStart = $request->date_range_start;
             $dateRangeEnd = $request->date_range_end;
     
-            $query->whereBetween('plan_start_date', [$dateRangeStart, $dateRangeEnd])
-                  ->orWhereBetween('plan_end_date', [$dateRangeStart, $dateRangeEnd])
-                  ->orWhereBetween('actual_start_date', [$dateRangeStart, $dateRangeEnd])
-                  ->orWhereBetween('actual_end_date', [$dateRangeStart, $dateRangeEnd]);
+            $query->where(function ($q) use ($dateRangeStart, $dateRangeEnd) {
+                $q->whereBetween('plan_start_date', [$dateRangeStart, $dateRangeEnd])
+                  ->orWhereBetween('plan_end_date', [$dateRangeStart, $dateRangeEnd]);
+            });
         }
     
         // Conditionally apply search filter
@@ -41,19 +42,6 @@ class ProjectsController extends Controller
                   ->orWhere('account_marketing', 'like', "%$search%");
             });
         }
-    
-        // Apply sorting
-        $projects = $query->orderByRaw("
-            CASE
-                WHEN status = 'Selesai' THEN 1
-                WHEN status = 'Pembayaran' THEN 2
-                WHEN status = 'Implementasi' THEN 3
-                WHEN status = 'Follow Up' THEN 4
-                WHEN status = 'Postpone' THEN 5
-                ELSE 6
-            END
-        ")->orderBy('id')->paginate(10);
-
 
         //count total nilai pekerjaan RKAP
         $values_rkap = $query->pluck('nilai_pekerjaan_rkap');
@@ -72,11 +60,12 @@ class ProjectsController extends Controller
 
 
         $baseNumber = 0;
-        
-        //dd($total_rkap);
 
+        //$project = $query->get();
+        
+        dd($project);
     
-        return view('monitoring', compact('projects', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
+        return view('monitoring', compact('project', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
     }
     
 
