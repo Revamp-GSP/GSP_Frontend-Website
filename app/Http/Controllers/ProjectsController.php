@@ -61,11 +61,11 @@ class ProjectsController extends Controller
 
         $baseNumber = 0;
 
-        //$project = $query->get();
+        $projects = $query->get();
         
-        dd($project);
+        //dd($project);
     
-        return view('monitoring', compact('project', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
+        return view('monitoring', compact('projects', 'format_total', 'format_aktual', 'format_kontrak', 'baseNumber'));
     }
     
 
