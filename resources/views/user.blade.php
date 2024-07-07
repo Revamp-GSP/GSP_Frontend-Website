@@ -39,11 +39,7 @@
     <div class="details-container">
         <div class="box large">
             <div class="header">
-                <h5>Personal information</h5>
-                <button class="edit-button">
-                    <i class='bx bx-pencil'></i>
-                    Edit
-                </button>
+                <h5 style="margin-bottom: 20px">Personal information</h5>
                 <div class="info">
                     <div class="info-row">
                         <div class="info-label">First Name</div>

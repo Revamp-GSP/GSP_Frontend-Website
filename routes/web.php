@@ -83,7 +83,9 @@ Route::get('/monitoring/{nama_pekerjaan}', [ProjectsController::class, 'show'])-
 Route::post('/task', [ProjectsController::class, 'storeTask']);
 
 
-
+Route::get('/notification', function () {
+    return view('notification');
+});
 
 Route::get('/test', function () {
     return view('test');

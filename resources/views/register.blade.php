@@ -9,9 +9,36 @@
   </head>
   <body>
     <div class="layout">
-      <div class="brand">
-        <img src="img/gsp.png" alt="gsp" width="70">
-        <a style="margin: 10px;">Monitoring Management System</a>
+      <div class="regisBox">
+        <div class="brand">
+          <img src="img/gsp.png" alt="gsp" width="70">
+          <a style="margin: 10px; color:rgb(0, 0, 0); font-weight:700; font-size:20px;">Monitoring Management System</a>
+        </div>
+        <div class="title">
+          <a>Create your Account</a>
+        </div>
+        <form class="register-form">
+          <div class="input-box">
+            <label for="exampleInputUsername" class="form-label">Username :</label>
+            <input name="username" type="username" class="form-control" id="username" placeholder="enter username" required>
+          </div>
+          <div class="input-box" style="margin-top: 15px">
+            <label for="exampleInputEmail" class="form-label">Email :</label>
+            <input name="email" type="email" class="form-control" id="email" placeholder="enter email" required>
+          </div>
+          <div class="input-box" style="margin-top: 15px">
+            <label for="exampleInputPassword" class="form-label">Password :</label>
+            <input name="password" type="password" class="form-control" id="password" placeholder="enter email" required>
+          </div>
+          <div class="input-box" style="margin-top: 15px">
+            <label for="exampleInputRole" class="form-label">Jabatan :</label>
+            <input name="role" type="role" class="form-control" id="role" placeholder="masukkan jabatan anda" required>
+          </div>
+          <div class="d-grid gap-2" style="margin-top: 15px">
+            <button class="btn registerButton" type="submit">Register</button>
+          </div>
+
+        </form>
       </div>
     </div>
 

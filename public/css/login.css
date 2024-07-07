@@ -51,11 +51,6 @@ body {
     color: aliceblue;
 }
 
-.link-forgot {
-    display: flex;
-    float: right;
-}
-
 .createAccount {
     display: flex;
     margin-top: 20px;
